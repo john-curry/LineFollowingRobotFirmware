@@ -25,7 +25,7 @@ int main(void) {
 
   while (1) {
     
-    execute_state(*current_state);
+    execute_State(*current_state);
 
     /* So that the robot does not run at max speed */
     Delay(0x3FFFFF); 

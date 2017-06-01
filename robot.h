@@ -20,5 +20,10 @@ typedef struct _robot {
   uint16_t wh_distance; // = 
 } Robot;
 
-
+/*
+  Sets the current state for the robot.
+  Input: Robot and the current state.
+  Output: None.
+*/
+void set_Robot_State(Robot * robot, State * current_state);
 #endif
