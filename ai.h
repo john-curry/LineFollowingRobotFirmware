@@ -53,5 +53,4 @@ State eval(State * next_states, State * current, Input * in);
   The exact behaviour should be implemented in another method
 */
 void execute_State(State current_state);
-
 #endif

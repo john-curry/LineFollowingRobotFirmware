@@ -1,4 +1,10 @@
 #include "ai.h"
+#include <string.h>
+/* private method */
+bool is_State(char * state_name, State * cs) {
+  if (strcmp(state_name, cs->name) == 0) return true;
+  return false;
+}
 
 State * get_Next_States() {
   // TODO: implement all states
@@ -19,11 +25,23 @@ State eval(State * next_states, State * current, Input * in) {
   return s;
 }
 
-void execute_State(State current_state) {
+void execute_State(Robot * robot, State * current_state) {
   /* TODO: implement functionality */
-
-  switch (current_state.uuid) {
-    default:
-      break;
+  /* 
+    This is just an idea of how this method should work.
+    When a new state is added, a new if statement should also
+    be added. There are more elegent ways to do this, but
+    they are usually more complicated and error prone.
+  */
+  if (is_State("move_forward", current_state)) {
+    move_Forward(robot, current_state);
+  }
+  else if (is_State("stop", current_state)) {
+    stop_Robot(robot, current_state);
+  }
+  else {
+    /* This else block should be unreachable */
+    /* TODO: implement some sort of error reporting */
   }
 }
+
