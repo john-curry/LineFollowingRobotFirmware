@@ -1,4 +1,10 @@
-Bare-bones starting point for project. So far only toggles the GPIO pins PD12 and PD13.
+Skelaton code for the control of the robot via the mircocontroller.
+
+Hardware programming should be done in the robot\_logic.c file.
+
+High level decision making should go in the ai.c eval method.
+
+Code is judiciously commented so please read.
 
 Put this in the Project Folder of the stm32\_discovery\_arm\_gcc\
 ie on my computer:
