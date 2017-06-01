@@ -2,6 +2,7 @@
 #include "stm32f4_discovery.h"
 #include "ai.h"
 #include "robot.h"
+#include "maze.h"
 
 void Delay(__IO uint32_t nCount);
 void Init_GPIO();
@@ -14,6 +15,8 @@ int main(void) {
   Init_GPIO();
 
   Robot * robot;
+
+  Maze * maze;
 
   State * current_state;
                                                             

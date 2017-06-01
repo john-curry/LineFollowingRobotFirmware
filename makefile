@@ -1,7 +1,7 @@
 # Put your stlink folder here so make burn will work.
 STLINK=~/src/stlink
 
-SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c robot.c
+SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c robot.c maze.c
 
 # Library modules
 SRCS += stm32f4xx_gpio.c stm32f4xx_rcc.c
