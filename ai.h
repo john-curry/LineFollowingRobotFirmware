@@ -2,25 +2,34 @@
 #define AI_H
 #include <stddef.h>
 #include <stdint.h>
-
+#include <stdbool.h>
 /* 
   struct to hold all the data for the current state
 */
-typedef struct mstate {
+typedef struct _state {
+  /* uuid should be the unique to the state_name */
   uint32_t uuid;
-} state;
+  /* for convenience sake */
+  char * state_name;
+  /* for now we go with 65535 being max rotation */
+  uint16_t angle; 
+  /* either motor one/two are on or off */
+  bool motor_one;
+  /* */
+  bool motor_two;
+} State;
 
 /* defines the datastructure for the IR sensor input */
-typedef struct minput {
+typedef struct _input {
   uint8_t data[8]; 
-} input;
+} Input;
 
 /* 
    Input: None
    Return: Array of state structs.
    Note: Should not depend on current input or current state.
 */
-state * get_next_states();
+State * get_next_states();
 
 /* 
    Method should read the values from GPIO pins and 
@@ -28,7 +37,7 @@ state * get_next_states();
    Input: None
    Return: input struct
 */
-input read_inputs();
+Input read_inputs();
 
 /* 
   Method that takes the input, current_state and all the 
@@ -37,12 +46,12 @@ input read_inputs();
 
   Note: next_states is many states and method returns one state.
 */
-state eval(state * next_states, state * current, input * in);
+State eval(State * next_states, State * current, Input * in);
 
 /*
   Tells the robot what to do based on the current state.
   The exact behaviour should be implemented in another method
 */
-void execute_state(state current_state);
+void execute_state(State current_state);
 
 #endif

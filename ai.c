@@ -1,22 +1,22 @@
 #include "ai.h"
 
-state * get_next_states() {
+State * get_next_states() {
   // TODO: implement all states
   return NULL;
 }
 
-input read_inputs() {
-  input in;
+Input read_inputs() {
+  Input in;
   // TODO: implement reading form IR sensors and populating input ob
   return in;
 }
 
-state eval(state * next_states, state * current, input * in) {
-  state s;
+State eval(State * next_states, State * current, Input * in) {
+  State s;
   return s;
 }
 
-void execute_state(state current_state) {
+void execute_state(State current_state) {
   /* TODO: implement functionality */
 
   switch (current_state.uuid) {

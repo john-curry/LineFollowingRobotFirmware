@@ -1,6 +1,7 @@
 #define LineFollowingRobot
 #include "stm32f4_discovery.h"
 #include "ai.h"
+#include "robot.h"
 
 void Delay(__IO uint32_t nCount);
 void Init_GPIO();
@@ -12,11 +13,13 @@ int main(void) {
 
   Init_GPIO();
 
-  state * current_state;
+  Robot * robot;
+
+  State * current_state;
                                                             
-  input in = read_inputs(); 
+  Input in = read_inputs(); 
                                                             
-  state * next_states = get_next_states();
+  State * next_states = get_next_states();
   
   *current_state = eval(next_states, current_state, &in);  
 
@@ -27,11 +30,11 @@ int main(void) {
     /* So that the robot does not run at max speed */
     Delay(0x3FFFFF); 
 
-    input in = read_inputs(); 
+    Input in = read_inputs(); 
                                                               
-    state * next_states = get_next_states();
+    State * next_states = get_next_states();
     
-    state current_state = eval(next_states, &current_state, &in);  
+    State current_state = eval(next_states, &current_state, &in);  
 
     /* Turn on GPIO PD12, PD13 */
     GPIO_SetBits(GPIOD, GPIO_Pin_12);

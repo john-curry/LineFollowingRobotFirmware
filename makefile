@@ -7,7 +7,7 @@ SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c
 SRCS += stm32f4xx_gpio.c stm32f4xx_rcc.c
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
-PROJ_NAME=io_toggle
+PROJ_NAME=robotfollowstheline
 
 #######################################################################################
 
