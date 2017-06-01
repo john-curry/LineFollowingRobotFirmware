@@ -34,7 +34,7 @@ int main(void) {
 
     /* do thing that the robot should do */
     if (current_state != NULL) {
-      execute_State(*current_state);
+      execute_State(robot, current_state);
     }
 
   } while (current_state != NULL);

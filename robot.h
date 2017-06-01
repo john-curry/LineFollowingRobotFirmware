@@ -1,6 +1,6 @@
 #ifndef ROBOT_H
 #define ROBOT_H
-#include "ai.h"
+#include <stdint.h>
 typedef struct _robot {
   /* 
     the amount that we change the angle by 
@@ -18,10 +18,4 @@ typedef struct _robot {
   */
   uint16_t wh_distance; // = 
 } Robot;
-
-/*
-  Sets the current state for the robot.
-  Input: Robot and the current state.
-  Output: None.
-*/
 #endif

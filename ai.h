@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include "robot.h"
 /* 
   struct to hold all the data for the current state
 */
@@ -52,5 +53,5 @@ State eval(State * next_states, State * current, Input * in);
   Tells the robot what to do based on the current state.
   The exact behaviour should be implemented in another method
 */
-void execute_State(State current_state);
+void execute_State(Robot * robot, State * current_state);
 #endif

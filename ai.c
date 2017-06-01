@@ -1,8 +1,9 @@
 #include "ai.h"
+#include "robot_logic.h"
 #include <string.h>
 /* private method */
 bool is_State(char * state_name, State * cs) {
-  if (strcmp(state_name, cs->name) == 0) return true;
+  if (strcmp(state_name, cs->state_name) == 0) return true;
   return false;
 }
 
