@@ -8,6 +8,8 @@
   This is where most of hardware programming should be done.
   For now all methods should be NON-BLOCKING (ie no infinite while loops)
   but this may change in future versions.
+  None of these methods should call the read_Inputs method for now
+  but I am willing to debate this point.
 */
 
 /* 
