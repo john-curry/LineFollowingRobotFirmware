@@ -2,6 +2,10 @@
 #define AI_H
 #include <stddef.h>
 #include <stdint.h>
+
+/* 
+  struct to hold all the data for the current state
+*/
 typedef struct mstate {
   uint32_t uuid;
 } state;
@@ -16,10 +20,7 @@ typedef struct minput {
    Return: Array of state structs.
    Note: Should not depend on current input or current state.
 */
-state * get_next_states() {
-  // TODO: implement all states
-  return NULL;
-}
+state * get_next_states();
 
 /* 
    Method should read the values from GPIO pins and 
@@ -27,11 +28,7 @@ state * get_next_states() {
    Input: None
    Return: input struct
 */
-input read_inputs() {
-  input in;
-  // TODO: implement reading form IR sensors and populating input ob
-  return in;
-}
+input read_inputs();
 
 /* 
   Method that takes the input, current_state and all the 
@@ -40,21 +37,12 @@ input read_inputs() {
 
   Note: next_states is many states and method returns one state.
 */
-state eval(state * next_states, state * current, input * in) {
-  state s;
-  return s;
-}
+state eval(state * next_states, state * current, input * in);
 
 /*
   Tells the robot what to do based on the current state.
   The exact behaviour should be implemented in another method
 */
-void execute_state(state current_state) {
-  /* TODO: implement functionality */
+void execute_state(state current_state);
 
-  switch (current_state.uuid) {
-    default:
-      break;
-  }
-}
 #endif
