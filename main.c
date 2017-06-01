@@ -17,9 +17,9 @@ int main(void) {
 
   State * current_state;
                                                             
-  Input in = read_inputs(); 
+  Input in = read_Inputs(); 
                                                             
-  State * next_states = get_next_states();
+  State * next_states = get_Next_States();
   
   *current_state = eval(next_states, current_state, &in);  
 
@@ -30,9 +30,9 @@ int main(void) {
     /* So that the robot does not run at max speed */
     Delay(0x3FFFFF); 
 
-    Input in = read_inputs(); 
+    Input in = read_Inputs(); 
                                                               
-    State * next_states = get_next_states();
+    State * next_states = get_Next_States();
     
     State current_state = eval(next_states, &current_state, &in);  
 

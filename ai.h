@@ -29,7 +29,7 @@ typedef struct _input {
    Return: Array of state structs.
    Note: Should not depend on current input or current state.
 */
-State * get_next_states();
+State * get_Next_States();
 
 /* 
    Method should read the values from GPIO pins and 
@@ -37,7 +37,7 @@ State * get_next_states();
    Input: None
    Return: input struct
 */
-Input read_inputs();
+Input read_Inputs();
 
 /* 
   Method that takes the input, current_state and all the 
@@ -52,6 +52,6 @@ State eval(State * next_states, State * current, Input * in);
   Tells the robot what to do based on the current state.
   The exact behaviour should be implemented in another method
 */
-void execute_state(State current_state);
+void execute_State(State current_state);
 
 #endif
