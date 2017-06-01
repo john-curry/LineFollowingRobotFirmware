@@ -2,7 +2,6 @@
 #define ROBOT_H
 #include "ai.h"
 typedef struct _robot {
-  State * current_state;
   /* 
     the amount that we change the angle by 
     TODO: calibrate wheel rotation
@@ -25,5 +24,4 @@ typedef struct _robot {
   Input: Robot and the current state.
   Output: None.
 */
-void set_Robot_State(Robot * robot, State * current_state);
 #endif

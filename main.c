@@ -5,14 +5,13 @@
 #include "maze.h"
 
 void Delay(__IO uint32_t nCount);
-void Init_GPIO();
+void init_GPIO();
+void flash_GPIO_Pins();
 
 int main(void) {
-
-  /* GPIOD Periph clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-
-  Init_GPIO();
+  
+  /* enable and setup pins PD12, PD13 */
+  init_GPIO();
 
   /* holds all the data about the robot */
   Robot * robot;
@@ -23,46 +22,30 @@ int main(void) {
   /* what the robot is currently doing */
   State * current_state;
                                                             
-  /* get the data from the sensors */
-  Input in = read_Inputs(); 
-                                                            
-  /* see what the robot can do next */
-  State * next_states = get_Next_States();
-  
-  /* pick the first thing for the robot to do */
-  *current_state = eval(next_states, current_state, &in);  
-
-  while (current_state != NULL) {
-    
-    /* do thing that the robot should do */
-    execute_State(*current_state);
-
-    /* So that the robot does not run at max speed */
-    Delay(0x3FFFFF); 
-
+  do {
+    /* get the data from the sensors */
     Input in = read_Inputs(); 
                                                               
+    /* see what the robot can do next */
     State * next_states = get_Next_States();
     
-    State current_state = eval(next_states, &current_state, &in);  
+    /* pick the action the robot to take */
+    *current_state = eval(next_states, current_state, &in);  
 
-    /* Turn on GPIO PD12, PD13 */
-    GPIO_SetBits(GPIOD, GPIO_Pin_12);
-    GPIO_SetBits(GPIOD, GPIO_Pin_13);
+    /* do thing that the robot should do */
+    if (current_state != NULL) {
+      execute_State(*current_state);
+    }
 
-    /* Insert delay */
-    Delay(0x3FFFFF);
-    
-    /* Turn off GPIO PD12, PD13 */
-    GPIO_ResetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13);
-    
-    /* Insert delay */
-    Delay(0xFFFFFF);
-  }
+  } while (current_state != NULL);
+
   return 0;
 }
 
-void Init_GPIO() {
+void init_GPIO() {
+  /* GPIOD Periph clock enable */
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+
   /* Initialization struct */
   GPIO_InitTypeDef  GPIO_InitStructure;
 
@@ -73,6 +56,21 @@ void Init_GPIO() {
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
+}
+
+void flash_GPIO() {
+  /* Turn on GPIO PD12, PD13 */
+  GPIO_SetBits(GPIOD, GPIO_Pin_12);
+  GPIO_SetBits(GPIOD, GPIO_Pin_13);
+
+  /* Insert delay */
+  Delay(0x3FFFFF);
+  
+  /* Turn off GPIO PD12, PD13 */
+  GPIO_ResetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13);
+  
+  /* Insert delay */
+  Delay(0xFFFFFF);
 }
 
 void Delay(__IO uint32_t nCount)
