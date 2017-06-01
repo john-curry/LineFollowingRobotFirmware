@@ -14,20 +14,27 @@ int main(void) {
 
   Init_GPIO();
 
+  /* holds all the data about the robot */
   Robot * robot;
 
+  /* holds all the data about the maze so far */
   Maze * maze;
 
+  /* what the robot is currently doing */
   State * current_state;
                                                             
+  /* get the data from the sensors */
   Input in = read_Inputs(); 
                                                             
+  /* see what the robot can do next */
   State * next_states = get_Next_States();
   
+  /* pick the first thing for the robot to do */
   *current_state = eval(next_states, current_state, &in);  
 
-  while (1) {
+  while (current_state != NULL) {
     
+    /* do thing that the robot should do */
     execute_State(*current_state);
 
     /* So that the robot does not run at max speed */
