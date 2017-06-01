@@ -12,12 +12,6 @@ typedef struct _state {
   uint32_t uuid;
   /* for convenience sake */
   char * state_name;
-  /* for now we go with 65535 being max rotation */
-  uint16_t angle; 
-  /* either motor one/two are on or off */
-  bool motor_one;
-  /* */
-  bool motor_two;
 } State;
 
 /* defines the datastructure for the IR sensor input */
@@ -30,7 +24,7 @@ typedef struct _input {
    Return: Array of state structs.
    Note: Should not depend on current input or current state.
 */
-State * get_Next_States();
+void populate_States(State * next_states);
 
 /* 
    Method should read the values from GPIO pins and 
@@ -44,7 +38,6 @@ Input read_Inputs();
   Method that takes the input, current_state and all the 
   next possible states and returns the next state that 
   the robot should take. 
-
   Note: next_states is many states and method returns one state.
 */
 State eval(State * next_states, State * current, Input * in);

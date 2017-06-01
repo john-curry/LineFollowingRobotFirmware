@@ -1,5 +1,6 @@
 #include "ai.h"
 #include "robot_logic.h"
+#include "states.h"
 #include <string.h>
 /* private method */
 bool is_State(char * state_name, State * cs) {
@@ -7,9 +8,8 @@ bool is_State(char * state_name, State * cs) {
   return false;
 }
 
-State * get_Next_States() {
+void populate_States(State * next_states) {
   // TODO: implement all states
-  return NULL;
 }
 
 Input read_Inputs() {

@@ -3,6 +3,7 @@
 #include "ai.h"
 #include "robot.h"
 #include "maze.h"
+#include "states.h"
 
 void Delay(__IO uint32_t nCount);
 void init_GPIO();
@@ -27,7 +28,7 @@ int main(void) {
     Input in = read_Inputs(); 
                                                               
     /* see what the robot can do next */
-    State * next_states = get_Next_States();
+    State * next_states = STATES;
     
     /* pick the action the robot to take */
     *current_state = eval(next_states, current_state, &in);  
