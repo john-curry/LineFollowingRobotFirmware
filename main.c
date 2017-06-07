@@ -7,7 +7,12 @@
 
 void Delay(__IO uint32_t nCount);
 void init_GPIO();
-void flash_GPIO_Pins();
+void flash_GPIO();
+
+Robot robot;
+
+uint16_t p1 = GPIO_Pin_3;
+uint16_t p2 = GPIO_Pin_1;
 
 int main(void) {
   
@@ -15,7 +20,7 @@ int main(void) {
   init_GPIO();
 
   /* holds all the data about the robot */
-  Robot * robot;
+  //Robot * robot;
 
   /* holds all the data about the maze so far */
   Maze * maze;
@@ -24,6 +29,7 @@ int main(void) {
   State * current_state;
                                                             
   do {
+    flash_GPIO();
     /* get the data from the sensors */
     Input in = read_Inputs(); 
                                                               
@@ -35,40 +41,40 @@ int main(void) {
 
     /* do thing that the robot should do */
     if (current_state != NULL) {
-      execute_State(robot, current_state);
+      execute_State(&robot, current_state);
     }
 
-  } while (current_state != NULL);
+  //} while (current_state != NULL);
+  } while (1);
 
   return 0;
 }
 
 void init_GPIO() {
   /* GPIOD Periph clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
 
   /* Initialization struct */
   GPIO_InitTypeDef  GPIO_InitStructure;
 
   /* Configure PD12, PD13 */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12 | GPIO_Pin_13;
+  GPIO_InitStructure.GPIO_Pin = p1 | p2;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(GPIOD, &GPIO_InitStructure);
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_OD;
+  //GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+  GPIO_Init(GPIOE, &GPIO_InitStructure);
 }
 
 void flash_GPIO() {
   /* Turn on GPIO PD12, PD13 */
-  GPIO_SetBits(GPIOD, GPIO_Pin_12);
-  GPIO_SetBits(GPIOD, GPIO_Pin_13);
+  GPIO_SetBits(GPIOE, p1);
+  GPIO_SetBits(GPIOE, p2);
 
   /* Insert delay */
   Delay(0x3FFFFF);
-  
-  /* Turn off GPIO PD12, PD13 */
-  GPIO_ResetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13);
+
+  //GPIO_ResetBits(GPIOE, p1 | p2);
   
   /* Insert delay */
   Delay(0xFFFFFF);
