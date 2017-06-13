@@ -4,6 +4,7 @@
 #include "script.h"
 #include "debug.h"
 #include <string.h>
+#include <stdlib.h>
 /* private method */
 bool is_State(char * state_name, State * cs) {
   if (strcmp(state_name, cs->state_name) == 0) return true;
@@ -34,20 +35,65 @@ bool eval(State * current, Input * in, Maze * maze) {
     program_counter++;
   }
 #else 
-  /* do the algorithm 
-   
-
-
-  */
   if (is_State("goal", current)) {
     return true;
+
   } /* Do not return true past this point. Only set State current */
-  
+  /* Path Following Algorithm 
+   
+    Stocastically acceptable.
+    Based on the idea that if you always pick a random route,
+    you will eventually get to the goal.
+  */
+   
+  if (is_Input("left", in) && is_Input("rite", in) && is_Input("forw", in)) {
+    if (rand() < (RAND_MAX/3)) {
+      set_State(current, "turn_left");
+      return false;
+    }
+    /* TODO: fix integer overflow warning */
+    else if (rand() > (2*RAND_MAX/3)) {
+      set_State(current, "turn_right");
+      return false;
+    }
+    else {
+      set_State(current, "move_forward");
+      return false;
+    }
+  }
 
+  if (is_Input("left", in) && is_Input("right", in)) {
+    if (rand() < RAND_MAX/2) {
+      set_State(current, "turn_left");
+      return false;
+    }
+    set_State(current, "turn_right");
+    return false;
+  }
+  else if (is_Input("left", in)) {
+    set_State(current, "turn_left");
+    return false;
+  }
+  else if(is_Input("rite", in)) {
+    set_State(current, "turn_right");
+    return false;
+  }
+  else {
+    set_State(current, "move_forward");
+    return false;
+  }
 
+  /* PSEUDOCODE Depth First Search (DFS)
 
-
-  
+  if input has found a node
+    check if node has already been visited
+    if node has not been visited
+      visit node
+    else if node has been visited
+      keep turning
+    else if no new nodes
+      return to last node
+   */
 #endif 
   return false;
 }
