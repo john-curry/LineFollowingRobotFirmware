@@ -1,6 +1,7 @@
 #include "ai.h"
 #include "robot_logic.h"
 #include "states.h"
+#include "script.h"
 #include <string.h>
 /* private method */
 bool is_State(char * state_name, State * cs) {
@@ -18,13 +19,15 @@ Input read_Inputs() {
   return in;
 }
 
-void eval(State * current, State * next, Input * in) {
+void eval(State * current, Input * in) {
   // TODO: Figure out algorithm to use to pick the next state
   //       ie something something like DFS or BFS would be a 
   //       decent choice for solving this maze.
-  for (int i = 0; i < MAX_STATES; i++)
-    if(is_State("move_forward", &STATES[i])) 
-      current = &STATES[0];
+  static int program_counter = 0;
+  if (script[program_counter] != EOS) {
+    *current = STATES[script[program_counter]];
+    program_counter++;
+  }
 }
 
 void execute_State(Robot * robot, State * current_state) {
