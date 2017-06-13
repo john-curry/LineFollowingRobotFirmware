@@ -4,20 +4,21 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "robot.h"
+#include "input.h"
 /* 
   struct to hold all the data for the current state
 */
+
+#define ARG_LEN 3
+
 typedef struct _state {
-  /* uuid should be the unique to the state_name */
-  uint32_t uuid;
+  /* opcode for the state */
+  uint8_t opcode;
+  /* arguements the state takes */
+  uint8_t args[ARG_LEN];
   /* for convenience sake */
   char * state_name;
 } State;
-
-/* defines the datastructure for the IR sensor input */
-typedef struct _input {
-  uint8_t data[8]; 
-} Input;
 
 /* 
    Input: None

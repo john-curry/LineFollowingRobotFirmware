@@ -1,6 +1,6 @@
 #include "input.h"
 
-void init_Input(void) {
+void init_Input(Input * input) {
   /* init perhipheral clocks */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
@@ -38,7 +38,7 @@ void init_Input(void) {
   //ADC_SoftwareStartConv(ADC1);
 }
 
-uint16_t read_Input(void) {
+void read_Input(Input * input) {
     /* TODO: ADC still broken */
     //ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime_3Cycles);
     // Start the conversion
@@ -46,5 +46,5 @@ uint16_t read_Input(void) {
     // Wait until conversion completion
     while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
     // Get the conversion value
-    return ADC_GetConversionValue(ADC1);
+    //return ADC_GetConversionValue(ADC1);
 }

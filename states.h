@@ -13,22 +13,28 @@
 */
 static State STATES[MAX_STATES] = {
   {
-    .state_name = "move_forward"
+    .state_name = "move_forward",
+    .opcode = 0
   },
   {
-    .state_name = "turn_right"
+    .state_name = "turn_right",
+    .opcode = 1
   },
   {
-    .state_name = "turn_left"
+    .state_name = "turn_left",
+    .opcode = 2
   },
   {
-    .state_name = "reverse_robot"
+    .state_name = "reverse_robot",
+    .opcode = 3
   },
   {
-    .state_name = "delay_robot"
+    .state_name = "delay_robot",
+    .opcode = 4
   },
   {
-    .state_name = "stop_robot"
+    .state_name = "stop_robot",
+    .opcode = 5
   }
 };
 #endif

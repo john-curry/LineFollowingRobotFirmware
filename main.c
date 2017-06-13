@@ -6,7 +6,6 @@
 #include "maze.h"
 #include "input.h"
 #include "gpio.h"
-#include "states.h"
 
 int main(void) {
   
@@ -18,22 +17,22 @@ int main(void) {
 
   /* enable and setup the GPIO pins the robot uses */
   init_GPIO(&robot); 
-  /* data structure to hold input data */
-  Input in;
 
-  /* enable ADC */
-  //init_Input();
+  /* data structure to hold input data */
+  Input input;
+
+  /* enable ADC TODO: still does not work */
+  init_Input(&input);
 
   /* holds all the data about the maze so far */
   //Maze * maze;
 
   /* what the robot is currently doing */
   State current_state;
-  //execute_State(&robot, &STATES[0]);
-  //execute_State(&robot, &STATES[3]);
+
   do {
     /* pick the action the robot to take */
-    eval(&current_state, &in);  
+    eval(&current_state, &input);  
 
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);

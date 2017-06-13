@@ -12,12 +12,5 @@ static int script[] = {
   4,
   3,
   EOS
-//  3 // turn right
-//  4, 
-//  2, // turn left
-//  4, 
-//  3, // reverse
-//  4, 
-//  5  // stop
 };
 #endif
