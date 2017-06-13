@@ -2,6 +2,7 @@
 #include "robot_logic.h"
 #include "states.h"
 #include "script.h"
+#include "debug.h"
 #include <string.h>
 /* private method */
 bool is_State(char * state_name, State * cs) {
@@ -13,21 +14,21 @@ void populate_States(State * next_states) {
   // TODO: implement all states
 }
 
-Input read_Inputs() {
-  Input in;
-  // TODO: implement reading form IR sensors and populating input ob
-  return in;
-}
-
 void eval(State * current, Input * in) {
   // TODO: Figure out algorithm to use to pick the next state
   //       ie something something like DFS or BFS would be a 
   //       decent choice for solving this maze.
+//#ifndef DEBUG
+//
+//#endif
+
+#if DEBUG
   static int program_counter = 0;
   if (script[program_counter] != EOS) {
     *current = STATES[script[program_counter]];
     program_counter++;
   }
+#endif 
 }
 
 void execute_State(Robot * robot, State * current_state) {

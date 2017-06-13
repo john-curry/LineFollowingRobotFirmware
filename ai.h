@@ -28,14 +28,6 @@ typedef struct _state {
 void populate_States(State * next_states);
 
 /* 
-   Method should read the values from GPIO pins and 
-   setup the input data structure and return a reference to it.
-   Input: None
-   Return: input struct
-*/
-Input read_Inputs();
-
-/* 
   Method that takes the input, current_state and all the 
   next possible states and returns the next state that 
   the robot should take. 
