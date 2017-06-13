@@ -4,7 +4,7 @@ void add_Node(Maze * maze, Node * n) {
   /* TODO: add a check to make sure node 
            isn't already in the maze
   */
-  if (node->node_index < maze->num_nodes) return;
+  if (n->node_index < maze->num_nodes) return;
 
   int node = (maze->num_nodes++);
   maze->num_edges[node]++;
