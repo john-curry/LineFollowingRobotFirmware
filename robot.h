@@ -19,10 +19,14 @@ typedef struct _robot {
   */
   uint16_t wh_distance; // = 
 
-  uint16_t motor_pin_left  : GPIO_Pin_1;
+  uint16_t motor_plf;
+  uint16_t motor_plr;
 
-  uint16_t motor_pin_right : GPIO_Pin_3;
+  uint16_t motor_prf;
+  uint16_t motor_prr;
 
 
 } Robot;
+
+void init_Robot(Robot * robot);
 #endif

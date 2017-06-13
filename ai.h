@@ -40,11 +40,13 @@ Input read_Inputs();
   the robot should take. 
   Note: next_states is many states and method returns one state.
 */
-State eval(State * next_states, State * current, Input * in);
+void eval(State * current, State * next, Input * in);
 
 /*
   Tells the robot what to do based on the current state.
   The exact behaviour should be implemented in another method
 */
 void execute_State(Robot * robot, State * current_state);
+
+bool is_State(char * state_name, State * cs);
 #endif

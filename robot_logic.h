@@ -23,4 +23,13 @@ void move_Forward(Robot * robot, State * current_state);
 */
 void stop_Robot(Robot * robot, State * current_state);
 
+void reverse_Robot(Robot * robot, State * current_state);
+
+void turn_Left(Robot * robot, State * current_state);
+
+void turn_Right(Robot * robot, State * current_state);
+
+void delay_Robot(Robot * robot, State * current_state);
+
+
 #endif

@@ -18,12 +18,13 @@ Input read_Inputs() {
   return in;
 }
 
-State eval(State * next_states, State * current, Input * in) {
+void eval(State * current, State * next, Input * in) {
   // TODO: Figure out algorithm to use to pick the next state
   //       ie something something like DFS or BFS would be a 
   //       decent choice for solving this maze.
-  State s;
-  return s;
+  for (int i = 0; i < MAX_STATES; i++)
+    if(is_State("move_forward", &STATES[i])) 
+      current = &STATES[0];
 }
 
 void execute_State(Robot * robot, State * current_state) {
@@ -37,7 +38,19 @@ void execute_State(Robot * robot, State * current_state) {
   if (is_State("move_forward", current_state)) {
     move_Forward(robot, current_state);
   }
-  else if (is_State("stop", current_state)) {
+  else if (is_State("turn_right", current_state)) {
+    turn_Right(robot, current_state);
+  }
+  else if (is_State("turn_left", current_state)) {
+    turn_Left(robot, current_state);
+  }
+  else if (is_State("reverse_robot", current_state)) {
+    reverse_Robot(robot, current_state);
+  }
+  else if (is_State("delay_robot", current_state)) {
+    delay_Robot(robot, current_state);
+  }
+  else if (is_State("stop_robot", current_state)) {
     stop_Robot(robot, current_state);
   }
   else {

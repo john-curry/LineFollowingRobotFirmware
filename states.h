@@ -16,7 +16,19 @@ static State STATES[MAX_STATES] = {
     .state_name = "move_forward"
   },
   {
-    .state_name = "stop"
+    .state_name = "turn_right"
+  },
+  {
+    .state_name = "turn_left"
+  },
+  {
+    .state_name = "reverse_robot"
+  },
+  {
+    .state_name = "delay_robot"
+  },
+  {
+    .state_name = "stop_robot"
   }
 };
 #endif
