@@ -31,5 +31,5 @@ void turn_Right(Robot * robot, State * current_state);
 
 void delay_Robot(Robot * robot, State * current_state);
 
-
+void victory_Dance(Robot * robot, State * current_state);
 #endif

@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include "robot.h"
 #include "input.h"
+#include "maze.h"
 /* 
   struct to hold all the data for the current state
 */
@@ -33,7 +34,7 @@ void populate_States(State * next_states);
   the robot should take. 
   Note: next_states is many states and method returns one state.
 */
-void eval(State * current, Input * in);
+bool eval(State * current, Input * in, Maze * maze);
 
 /*
   Tells the robot what to do based on the current state.
@@ -42,4 +43,6 @@ void eval(State * current, Input * in);
 void execute_State(Robot * robot, State * current_state);
 
 bool is_State(char * state_name, State * cs);
+
+void set_State(State * s, char * name);
 #endif

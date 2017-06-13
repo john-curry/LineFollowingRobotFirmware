@@ -35,6 +35,15 @@ static State STATES[MAX_STATES] = {
   {
     .state_name = "stop_robot",
     .opcode = 5
+  },
+  {
+    .state_name = "goal",
+    .opcode = 6
+  },
+  {
+    .state_name = "start",
+    .opcode = 7
   }
 };
+
 #endif

@@ -39,3 +39,7 @@ void delay_Robot(Robot * robot, State * current_state) {
   volatile uint32_t count = 0xFFFFFF;
   while (count--);
 }
+
+void victory_Dance(Robot * robot, State * current_state) {
+  /* TODO: implement a victory dance sequence */
+}

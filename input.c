@@ -1,5 +1,10 @@
+#include <string.h>
 #include "input.h"
 
+bool is_Input(char * input_name, Input * in) {
+  if (strcmp(input_name, in->input_name) == 0) return true;
+  return false;
+}
 void init_Input(Input * input) {
   /* init perhipheral clocks */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);

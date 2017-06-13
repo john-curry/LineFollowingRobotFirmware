@@ -1,6 +1,7 @@
 #ifndef MAZE_H
 #define MAZE_H
 #include <stdint.h>
+#include <stdbool.h>
 /* assume there is going to be less than 32 paths at every node */
 #define MAX_EDGES 32
 
@@ -28,15 +29,13 @@ typedef struct _node {
   This is probably so overkill it's my favorite thing.
 */
 typedef struct _maze {
-  Node nodes[MAX_NODES][MAX_EDGES]; 
+  int current_node;
+  int num_nodes;
+  int num_edges[MAX_NODES];
+  bool edge[MAX_NODES][MAX_NODES];
 } Maze;
 
-/*
-  Should be called when the robot finds a split in the maze.
-  Return: new_node
-  Input: current_node
-*/
-void init_Node(Node * current_node, Node * new_node);
+void init_Maze(Maze * maze);
 
 /*
   Adds a new node to the maze. 

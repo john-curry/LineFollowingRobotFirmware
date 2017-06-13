@@ -10,25 +10,46 @@ bool is_State(char * state_name, State * cs) {
   return false;
 }
 
+void set_State(State * current, char * name) {
+  for (State * s = &STATES[0]; s != NULL; s += sizeof(State*)) {
+    if (is_State(name, s)) {
+      current = s;
+    }
+  }
+  /* impossible code path */
+}
+
 void populate_States(State * next_states) {
   // TODO: implement all states
 }
 
-void eval(State * current, Input * in) {
+bool eval(State * current, Input * in, Maze * maze) {
   // TODO: Figure out algorithm to use to pick the next state
   //       ie something something like DFS or BFS would be a 
   //       decent choice for solving this maze.
-//#ifndef DEBUG
-//
-//#endif
-
 #if DEBUG
   static int program_counter = 0;
   if (script[program_counter] != EOS) {
     *current = STATES[script[program_counter]];
     program_counter++;
   }
+#else 
+  /* do the algorithm 
+   
+
+
+  */
+  if (is_State("goal", current)) {
+    return true;
+  } /* Do not return true past this point. Only set State current */
+  
+
+
+
+
+  
 #endif 
+  return false;
 }
 
 void execute_State(Robot * robot, State * current_state) {
@@ -56,6 +77,9 @@ void execute_State(Robot * robot, State * current_state) {
   }
   else if (is_State("stop_robot", current_state)) {
     stop_Robot(robot, current_state);
+  }
+  else if (is_State("goal", current_state)) {
+    victory_Dance(robot, current_state);
   }
   else {
     /* This else block should be unreachable */
