@@ -47,12 +47,12 @@ bool eval(State * current, Input * in, Maze * maze) {
   */
    
   if (is_Input("left", in) && is_Input("rite", in) && is_Input("forw", in)) {
-    if (rand() < (RAND_MAX/3)) {
+    int direction = rand() % 3;
+    if (direction == 0) {
       set_State(current, "turn_left");
       return false;
     }
-    /* TODO: fix integer overflow warning */
-    else if (rand() > (2*RAND_MAX/3)) {
+    else if (direction == 1) {
       set_State(current, "turn_right");
       return false;
     }
@@ -63,7 +63,8 @@ bool eval(State * current, Input * in, Maze * maze) {
   }
 
   if (is_Input("left", in) && is_Input("right", in)) {
-    if (rand() < RAND_MAX/2) {
+    int direction = rand() % 2;
+    if (direction == 0) {
       set_State(current, "turn_left");
       return false;
     }
