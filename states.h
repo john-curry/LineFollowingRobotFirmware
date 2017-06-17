@@ -14,7 +14,7 @@
 static State STATES[MAX_STATES] = {
   {
     .state_name = "move_forward",
-    .opcode = 0
+    .opcode = 0,
   },
   {
     .state_name = "turn_right",

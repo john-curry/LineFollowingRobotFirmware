@@ -10,9 +10,12 @@ void move_Forward(Robot * robot, State * current_state) {
 }
 
 void stop_Robot(Robot * robot, State * current_state) {
-  GPIO_ResetBits(GPIOE, robot->motor_plr | robot->motor_prr);
-  GPIO_ResetBits(GPIOE, robot->motor_plf | robot->motor_prf);
-
+  //GPIO_ResetBits(GPIOE, robot->motor_plr | robot->motor_prr);
+  //GPIO_ResetBits(GPIOE, robot->motor_plf | robot->motor_prf);
+  GPIO_SetBits(GPIOE, robot->motor_plf);  
+  GPIO_SetBits(GPIOE, robot->motor_prf);  
+  GPIO_SetBits(GPIOE, robot->motor_plr);  
+  GPIO_SetBits(GPIOE, robot->motor_prr);  
 }
 
 void reverse_Robot(Robot * robot, State * current_state) {

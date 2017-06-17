@@ -5,10 +5,6 @@
 #include <stdbool.h>
 #include "stm32f4_discovery.h"
 
-ADC_InitTypeDef       ADC_InitStructure;
-ADC_CommonInitTypeDef ADC_CommonInitStructure;
-GPIO_InitTypeDef      GPIO_InitStructure;
-
 /* defines the datastructure for the IR sensor input raw data */
 typedef struct _input_data {
   uint8_t front;
@@ -40,9 +36,9 @@ bool is_Input(char * state_name, Input * in);
 //};
 
 /* TODO: implement input initialization */
-void init_Input(Input * input); 
+int init_Input(Input * input); 
 
 /* TODO: implement input reading */
-void read_Input(Input * input); 
+int read_Input(Input * input); 
 
 #endif

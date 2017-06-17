@@ -1,7 +1,7 @@
 # Put your stlink folder here so make burn will work.
 STLINK=~/src/stlink
 
-SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c robot.c maze.c robot_logic.c input.c gpio.c script.c
+SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c robot.c maze.c robot_logic.c input.c gpio.c
 
 # Library modules
 SRCS += stm32f4xx_gpio.c stm32f4xx_rcc.c stm32f4xx_adc.c 
@@ -16,7 +16,7 @@ STM_COMMON=../..
 CC=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-CFLAGS  = -g -O2 -Wall -Tstm32_flash.ld 
+CFLAGS  = -g -Wall -Tstm32_flash.ld 
 CFLAGS += -DUSE_STDPERIPH_DRIVER
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16

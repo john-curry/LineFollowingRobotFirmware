@@ -12,6 +12,7 @@ bool is_State(char * state_name, State * cs) {
 }
 
 void set_State(State * current, char * name) {
+  /* TODO: for some reason is broken */
   for (State * s = &STATES[0]; s != NULL; s += sizeof(State*)) {
     if (is_State(name, s)) {
       current = s;
