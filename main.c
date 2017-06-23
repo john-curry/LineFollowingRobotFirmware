@@ -22,7 +22,7 @@ int main(void) {
   Input input;
 
   /* enable ADC TODO: still does not work */
-  //jkinit_Input(&input);
+  init_Input(&input);
 
   /* holds all the data about the maze so far */
   Maze maze;
@@ -34,11 +34,10 @@ int main(void) {
   State current_state; 
 
   /* Tell the robot to start in state "start". 
-     See states.h for complete listing of states. */
+     See states.h for complete listing of states. 
+     TODO: Fix set_State function 
+  */
   //set_State(&current_state, "start"); 
-
-  //int i = init_Input(&input);
-  
   /* 
      Run the eval method and start control loop.
 
@@ -49,7 +48,7 @@ int main(void) {
      robot has obtained the "goal" state.
   */ 
   while (!eval(&current_state, &input, &maze)) {
-    //int i = init_Input(&input);
+    read_Input(&input.data);
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);
   }

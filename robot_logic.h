@@ -2,7 +2,6 @@
 #define ROBOT_LOGIC_H
 #include "robot.h"
 #include "ai.h"
-
 /*
   Method declarations for logic defining hardware control.
   This is where most of hardware programming should be done.

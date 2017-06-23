@@ -1,5 +1,4 @@
 #include "robot.h"
-#include "ai.h"
 #include "gpio.h"
 
 void init_Robot(Robot * robot) {
