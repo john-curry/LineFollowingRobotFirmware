@@ -1,0 +1,5 @@
+#!/bin/bash
+killall -q st-util
+make && make burn
+/home/bigboss/src/stlink/src/gdbserver/st-util > /dev/null 2>&1 &
+arm-none-eabi-gdb lfr.elf

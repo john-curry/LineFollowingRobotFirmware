@@ -6,6 +6,7 @@
 #include "maze.h"
 #include "input.h"
 #include "gpio.h"
+#include "init_input.h"
 
 int main(void) {
   
@@ -48,7 +49,7 @@ int main(void) {
      robot has obtained the "goal" state.
   */ 
   while (!eval(&current_state, &input, &maze)) {
-    read_Input(&input.data);
+    read_Input(&input);
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);
   }

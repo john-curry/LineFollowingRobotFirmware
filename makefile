@@ -1,13 +1,13 @@
 # Put your stlink folder here so make burn will work.
 STLINK=~/src/stlink
 
-SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c robot.c maze.c robot_logic.c input.c gpio.c
+SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c robot.c maze.c robot_logic.c input.c gpio.c init_input.c
 
 # Library modules
 SRCS += stm32f4xx_gpio.c stm32f4xx_rcc.c stm32f4xx_adc.c 
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
-PROJ_NAME=robotfollowstheline
+PROJ_NAME=lfr
 
 #######################################################################################
 
@@ -16,7 +16,7 @@ STM_COMMON=../..
 CC=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-CFLAGS  = -g -Wall -Tstm32_flash.ld 
+CFLAGS  = -g -Wall -Tstm32_flash.ld -Wno-unused-variable
 CFLAGS += -DUSE_STDPERIPH_DRIVER
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
@@ -53,6 +53,10 @@ clean:
 	rm -f $(PROJ_NAME).hex
 	rm -f $(PROJ_NAME).bin
 
+debug: proj
+	killall -q st-util
+	/home/bigboss/src/stlink/src/gdbserver/st-util > /dev/null 2>&1 &
+	argdb lfr.elf
 
 # Flash the STM32F4
 burn: proj
