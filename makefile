@@ -4,7 +4,7 @@ STLINK=~/src/stlink
 SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c ai.c robot.c maze.c robot_logic.c input.c gpio.c init_input.c
 
 # Library modules
-SRCS += stm32f4xx_gpio.c stm32f4xx_rcc.c stm32f4xx_adc.c 
+SRCS += stm32f4xx_gpio.c stm32f4xx_rcc.c stm32f4xx_adc.c stm32f4xx_tim.c
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
 PROJ_NAME=lfr

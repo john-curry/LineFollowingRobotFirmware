@@ -4,6 +4,7 @@
 #define INPUTS_MAX 32
 #include <stdbool.h>
 #include "stm32f4_discovery.h"
+#include "stm32f4xx_tim.h"
 #define NUM_INPUTS 7
 /* defines the datastructure for the IR sensor input raw data */
 typedef struct _input_data {

@@ -1,35 +1,61 @@
 #include "init_input.h"
-#include "stm32f4_discovery.h"
-void init_Input(Input * input) {
+
+void init_Timer() {
+  /* Timer datastructure */
+  TIM_TimeBaseInitTypeDef timerInitStructure; 
+
+  /* Enable timer clock */
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+  
+  /* Initialize clock */
+  timerInitStructure.TIM_Prescaler = 83;
+  timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+  timerInitStructure.TIM_Period = 99;
+  timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+  timerInitStructure.TIM_RepetitionCounter = 0;
+
+  /* Start timer */
+  TIM_TimeBaseInit(TIM2, &timerInitStructure);
+  TIM_Cmd(TIM2, ENABLE);
+  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+}
+
+ void init_Input(Input * input) {
   ADC_InitTypeDef       ADC_InitStructure;
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
-  GPIO_InitTypeDef      GPIO_InitStructure;
+  GPIO_InitTypeDef      GPIO_InitStructure_B;
+  GPIO_InitTypeDef      GPIO_InitStructure_E;
   GPIO_InitTypeDef      GPIO_InitStructure_Output;
 
   /* init perhipheral clocks */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 
-  /* configure GPIO pins for analog input GPIOA */
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 
-                              | GPIO_Pin_1 
-                              | GPIO_Pin_2 
-                              | GPIO_Pin_3 
-                              | GPIO_Pin_4 
-                              | GPIO_Pin_5 
-                              | GPIO_Pin_6;
+  /* configure GPIO pins for analog input GPIOE */
+  GPIO_InitStructure_B.GPIO_Pin = GPIO_Pin_0 
+                                | GPIO_Pin_1; 
 
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(GPIOA, &GPIO_InitStructure);
+  GPIO_InitStructure_E.GPIO_Pin = GPIO_Pin_4 
+                                | GPIO_Pin_5 
+                                | GPIO_Pin_6 
+                                | GPIO_Pin_7;
 
-  /* configure GPIO pins for output GPIOB */
-  GPIO_InitStructure_Output.GPIO_Pin = ADDR;
+  GPIO_InitStructure_E.GPIO_Mode = GPIO_Mode_AIN;
+  GPIO_InitStructure_E.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOE, &GPIO_InitStructure_E);
+
+  GPIO_InitStructure_B.GPIO_Mode = GPIO_Mode_AIN;
+  GPIO_InitStructure_B.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOB, &GPIO_InitStructure_B);
+
+  /* configure GPIO pins for output GPIOD */
+  GPIO_InitStructure_Output.GPIO_Pin = 0b111;;
   GPIO_InitStructure_Output.GPIO_Mode = GPIO_Mode_OUT;
   GPIO_InitStructure_Output.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure_Output.GPIO_PuPd = GPIO_PuPd_UP;
-  GPIO_Init(GPIOB, &GPIO_InitStructure_Output);
+  GPIO_Init(GPIOD, &GPIO_InitStructure_Output);
 
   /* ADC CommonInitStructure */
   ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
@@ -46,12 +72,12 @@ void init_Input(Input * input) {
   ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
   ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
   ADC_InitStructure.ADC_NbrOfConversion = 7;
-  ADC_Init(ADC1, &ADC_InitStructure);
 
-  //for (int i = 0; i < 7; i++) {
-  //  ADC_RegularChannelConfig(ADC1, i, i, ADC_SampleTime_3Cycles);
-  //}
-  ///* Enable ADC1 **************************************************************/
+  /* Enable ADC1 */
+  ADC_Init(ADC1, &ADC_InitStructure);
   ADC_Cmd(ADC1, ENABLE);
-  //ADC_SoftwareStartConv(ADC1);
+
+  /* Enable ADC2 */
+  //ADC_Init(ADC2, &ADC_InitStructure);
+  //ADC_Cmd(ADC2, ENABLE);
 }
