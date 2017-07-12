@@ -10,7 +10,7 @@ void init_Timer() {
   /* Initialize clock */
   timerInitStructure.TIM_Prescaler = 83;
   timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-  timerInitStructure.TIM_Period = 99;
+  timerInitStructure.TIM_Period = 2999;
   timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
   timerInitStructure.TIM_RepetitionCounter = 0;
 
@@ -24,37 +24,40 @@ void init_Timer() {
   ADC_InitTypeDef       ADC_InitStructure;
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
   GPIO_InitTypeDef      GPIO_InitStructure_B;
-  GPIO_InitTypeDef      GPIO_InitStructure_E;
+  GPIO_InitTypeDef      GPIO_InitStructure_C;
   GPIO_InitTypeDef      GPIO_InitStructure_Output;
 
   /* init perhipheral clocks */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 
-  /* configure GPIO pins for analog input GPIOE */
-  GPIO_InitStructure_B.GPIO_Pin = GPIO_Pin_0 
-                                | GPIO_Pin_1; 
-
-  GPIO_InitStructure_E.GPIO_Pin = GPIO_Pin_4 
-                                | GPIO_Pin_5 
-                                | GPIO_Pin_6 
-                                | GPIO_Pin_7;
-
-  GPIO_InitStructure_E.GPIO_Mode = GPIO_Mode_AIN;
-  GPIO_InitStructure_E.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_Init(GPIOE, &GPIO_InitStructure_E);
-
+  /* configure GPIO pins for analog input GPIOB */
+  GPIO_InitStructure_B.GPIO_Pin  = GPIO_Pin_0 
+                                 | GPIO_Pin_1; 
   GPIO_InitStructure_B.GPIO_Mode = GPIO_Mode_AIN;
   GPIO_InitStructure_B.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOB, &GPIO_InitStructure_B);
 
+  /* configure GPIO pins for analog input GPIOC */
+  GPIO_InitStructure_C.GPIO_Pin  = GPIO_Pin_0 
+                                 | GPIO_Pin_1 
+                                 | GPIO_Pin_2 
+                                 | GPIO_Pin_3
+                                 | GPIO_Pin_4;
+  GPIO_InitStructure_C.GPIO_Mode = GPIO_Mode_AIN;
+  GPIO_InitStructure_C.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOC, &GPIO_InitStructure_C);
+
+
   /* configure GPIO pins for output GPIOD */
-  GPIO_InitStructure_Output.GPIO_Pin = 0b111;;
-  GPIO_InitStructure_Output.GPIO_Mode = GPIO_Mode_OUT;
+  GPIO_InitStructure_Output.GPIO_Pin   = GPIO_Pin_0 
+                                       | GPIO_Pin_1 
+                                       | GPIO_Pin_2;
+  GPIO_InitStructure_Output.GPIO_Mode  = GPIO_Mode_OUT;
   GPIO_InitStructure_Output.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure_Output.GPIO_PuPd = GPIO_PuPd_UP;
+  GPIO_InitStructure_Output.GPIO_PuPd  = GPIO_PuPd_UP;
   GPIO_Init(GPIOD, &GPIO_InitStructure_Output);
 
   /* ADC CommonInitStructure */
@@ -76,8 +79,5 @@ void init_Timer() {
   /* Enable ADC1 */
   ADC_Init(ADC1, &ADC_InitStructure);
   ADC_Cmd(ADC1, ENABLE);
-
-  /* Enable ADC2 */
-  //ADC_Init(ADC2, &ADC_InitStructure);
-  //ADC_Cmd(ADC2, ENABLE);
+  init_Timer();
 }
