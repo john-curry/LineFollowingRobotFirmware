@@ -1,6 +1,7 @@
 #include "init_input.h"
 
 void init_Timer() {
+  /* TODO: For some reason this does not fire when I want it to */
   /* Timer datastructure */
   TIM_TimeBaseInitTypeDef timerInitStructure; 
 
@@ -21,6 +22,7 @@ void init_Timer() {
 }
 
  void init_Input(Input * input) {
+  input->calibrated = false;
   ADC_InitTypeDef       ADC_InitStructure;
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
   GPIO_InitTypeDef      GPIO_InitStructure_B;

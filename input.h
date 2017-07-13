@@ -8,18 +8,36 @@
 #include "stm32f4xx_adc.h"
 #define NUM_INPUTS 7
 /* defines the datastructure for the IR sensor input raw data */
-typedef struct _input_data {
-  uint8_t raw[7]; 
-} Input_Data;
-
 typedef struct _input_types {
-  uint16_t data[7];
-  char input_name[STR_MAX];
+  uint16_t  data[NUM_INPUTS];
+  char      input_name[STR_MAX];
+  uint16_t  low[NUM_INPUTS];
+  uint16_t  high[NUM_INPUTS];
+  bool      calibrated;
 } Input;
 
-static uint16_t ADDR = 0b111;
-static uint16_t IN_PINS = 0b1111111;
-static uint16_t ADC_CHANNELS = 7;
+/* On black */
+static uint16_t high[NUM_PINS] = {
+  2100,
+  2100,
+  2000,
+  2100,
+  1400,
+  2100,
+  2100
+};
+
+/* On white */
+static uint16_t low[NUM_PINS] = {
+  1200,
+  1200,
+   800,
+  1300,
+   400,
+  1100,
+  1300
+};
+
 static uint8_t pins[NUM_INPUTS] = {
   0b00000000,
   0b00000001,
@@ -41,12 +59,6 @@ static uint8_t channels[NUM_INPUTS] = {
 
 bool is_Input(char * state_name, Input * in);
 
-uint16_t read_LED(uint16_t pin);
-
-/* TODO: implement input initialization */
-void init_Input(Input * input); 
-
-/* TODO: implement input reading */
 void read_Input(Input * input); 
 
 #endif

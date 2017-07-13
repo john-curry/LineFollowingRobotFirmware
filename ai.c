@@ -36,66 +36,15 @@ bool eval(State * current, Input * in, Maze * maze) {
     program_counter++;
   }
 #else 
+
   if (is_State("goal", current)) {
     return true;
-
   } /* Do not return true past this point. Only set State current */
-  /* Path Following Algorithm 
-   
-    Stocastically acceptable.
-    Based on the idea that if you always pick a random route,
-    you will eventually get to the goal.
-  */
-   
-  if (is_Input("left", in) && is_Input("rite", in) && is_Input("forw", in)) {
-    int direction = rand() % 3;
-    if (direction == 0) {
-      set_State(current, "turn_left");
-      return false;
-    }
-    else if (direction == 1) {
-      set_State(current, "turn_right");
-      return false;
-    }
-    else {
-      set_State(current, "move_forward");
-      return false;
-    }
+
+  if (is_State("Start", current)) {
+
   }
 
-  if (is_Input("left", in) && is_Input("right", in)) {
-    int direction = rand() % 2;
-    if (direction == 0) {
-      set_State(current, "turn_left");
-      return false;
-    }
-    set_State(current, "turn_right");
-    return false;
-  }
-  else if (is_Input("left", in)) {
-    set_State(current, "turn_left");
-    return false;
-  }
-  else if(is_Input("rite", in)) {
-    set_State(current, "turn_right");
-    return false;
-  }
-  else {
-    set_State(current, "move_forward");
-    return false;
-  }
-
-  /* PSEUDOCODE Depth First Search (DFS)
-
-  if input has found a node
-    check if node has already been visited
-    if node has not been visited
-      visit node
-    else if node has been visited
-      keep turning
-    else if no new nodes
-      return to last node
-   */
 #endif 
   return false;
 }
