@@ -41,11 +41,11 @@ void init_Timer() {
   GPIO_Init(GPIOB, &GPIO_InitStructure_B);
 
   /* configure GPIO pins for analog input GPIOC */
-  GPIO_InitStructure_C.GPIO_Pin  = GPIO_Pin_0 
-                                 | GPIO_Pin_1 
+  GPIO_InitStructure_C.GPIO_Pin  = GPIO_Pin_1 
                                  | GPIO_Pin_2 
                                  | GPIO_Pin_3
-                                 | GPIO_Pin_4;
+                                 | GPIO_Pin_4
+                                 | GPIO_Pin_5;
   GPIO_InitStructure_C.GPIO_Mode = GPIO_Mode_AIN;
   GPIO_InitStructure_C.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOC, &GPIO_InitStructure_C);

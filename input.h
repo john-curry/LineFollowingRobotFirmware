@@ -32,11 +32,11 @@ static uint8_t pins[NUM_INPUTS] = {
 static uint8_t channels[NUM_INPUTS] = {
   ADC_Channel_8,
   ADC_Channel_9,
-  ADC_Channel_10,
   ADC_Channel_11,
   ADC_Channel_12,
   ADC_Channel_13,
-  ADC_Channel_14
+  ADC_Channel_14,
+  ADC_Channel_15
 };
 
 bool is_Input(char * state_name, Input * in);

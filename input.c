@@ -14,7 +14,7 @@ void clear_Data(Input * input) {
 }
 
 void delay() {
-  volatile uint32_t count = 5000000;
+  volatile uint32_t count = 100000;
   while (count--);
 }
 void read_Input(Input * input) {
@@ -24,10 +24,11 @@ void read_Input(Input * input) {
     TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 
     GPIO_ResetBits(GPIOD, GPIO_Pin_All);
-    GPIO_SetBits  (GPIOD, i);
+    GPIO_SetBits  (GPIOD, pins[i]);
     delay();
 
-    ADC_RegularChannelConfig(ADC1, (i + (uint8_t)8), 1, ADC_SampleTime_28Cycles);
+    //ADC_RegularChannelConfig(ADC1, (i + (uint8_t)0x08), 1, ADC_SampleTime_3Cycles);
+    ADC_RegularChannelConfig(ADC1, channels[i], 1, ADC_SampleTime_3Cycles);
     ADC_SoftwareStartConv(ADC1);
 
     //while((TIM_GetITStatus(TIM2, TIM_IT_Update)   != RESET));
