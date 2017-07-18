@@ -3,23 +3,16 @@
 /* end of script */
 #define EOS (-1) 
 static int script[] = {
-  0, // forward
-  4,
-  4,
-  4,
-  3, // reverse
-  4, 
-  4,
-  4,
-  1, // right
-  4, 
-  4,
-  4,
-  2, // left
-  4,
-  4,
-  4,
   5, // stop
+  4,
+  1,
+  4,
+  2,
+  4,
+  7,
+  4,
+  8,
+  4,
   EOS
 };
 #endif

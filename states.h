@@ -1,7 +1,6 @@
 #ifndef STATES_H
 #define STATES_H
-
-#include "ai.h"
+#include "state.h"
 
 #define MAX_STATES 32
 /* 
@@ -41,9 +40,16 @@ static State STATES[MAX_STATES] = {
     .opcode = 6
   },
   {
-    .state_name = "start",
+    .state_name = "reverse_right",
     .opcode = 7
+  },
+  {
+    .state_name = "reverse_left",
+    .opcode = 8
+  },
+  {
+    .state_name = "start",
+    .opcode = 9
   }
 };
-
 #endif

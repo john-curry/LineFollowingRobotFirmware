@@ -22,7 +22,6 @@ void init_Timer() {
 }
 
  void init_Input(Input * input) {
-  input->calibrated = false;
   ADC_InitTypeDef       ADC_InitStructure;
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
   GPIO_InitTypeDef      GPIO_InitStructure_B;

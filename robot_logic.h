@@ -1,7 +1,7 @@
 #ifndef ROBOT_LOGIC_H
 #define ROBOT_LOGIC_H
 #include "robot.h"
-#include "ai.h"
+#include "state.h"
 /*
   Method declarations for logic defining hardware control.
   This is where most of hardware programming should be done.
@@ -31,4 +31,10 @@ void turn_Right(Robot * robot, State * current_state);
 void delay_Robot(Robot * robot, State * current_state);
 
 void victory_Dance(Robot * robot, State * current_state);
+
+void start_Robot(Robot * robot, State * current_state);
+
+void reverse_Left(Robot * robot, State * current_state);
+
+void reverse_Right(Robot * robot, State * current_state);
 #endif

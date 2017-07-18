@@ -11,13 +11,10 @@
 typedef struct _input_types {
   uint16_t  data[NUM_INPUTS];
   char      input_name[STR_MAX];
-  uint16_t  low[NUM_INPUTS];
-  uint16_t  high[NUM_INPUTS];
-  bool      calibrated;
 } Input;
 
 /* On black */
-static uint16_t high[NUM_PINS] = {
+static uint16_t sensor_high[NUM_INPUTS] = {
   2100,
   2100,
   2000,
@@ -28,7 +25,7 @@ static uint16_t high[NUM_PINS] = {
 };
 
 /* On white */
-static uint16_t low[NUM_PINS] = {
+static uint16_t sensor_low[NUM_INPUTS] = {
   1200,
   1200,
    800,
@@ -47,6 +44,7 @@ static uint8_t pins[NUM_INPUTS] = {
   0b00000101,
   0b00000110
 };
+
 static uint8_t channels[NUM_INPUTS] = {
   ADC_Channel_8,
   ADC_Channel_9,
@@ -61,4 +59,21 @@ bool is_Input(char * state_name, Input * in);
 
 void read_Input(Input * input); 
 
+bool is_High(Input*, uint8_t);
+
+bool on_Line(Input*);
+
+bool line_Left(Input * in);
+
+bool line_Right(Input * in);
+
+bool on_Center_Line(Input * in);
+
+bool left_Turn(Input * in);
+
+bool right_Turn(Input * in);
+
+bool is_Goal(Input * in);
+
+bool is_Junction(Input * in);
 #endif

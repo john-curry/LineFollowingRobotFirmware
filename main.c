@@ -1,7 +1,8 @@
 #define LineFollowingRobot
 #include "stm32f4_discovery.h"
 
-#include "ai.h"
+#include "state.h"
+#include "eval.h"
 #include "robot.h"
 #include "maze.h"
 #include "input.h"
@@ -38,7 +39,7 @@ int main(void) {
      See states.h for complete listing of states. 
      TODO: Fix set_State function 
   */
-  //set_State(&current_state, "start"); 
+  //set_State("stop_robot", &current_state); 
   /* 
      Run the eval method and start control loop.
 
@@ -48,6 +49,8 @@ int main(void) {
      The method eval will return true only when 
      robot has obtained the "goal" state.
   */ 
+  read_Input(&input);
+
   while (!eval(&current_state, &input, &maze)) {
     read_Input(&input);
     /* do thing that the robot should do */
