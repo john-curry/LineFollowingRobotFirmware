@@ -7,7 +7,7 @@
 #define RIGHT_C 4
 #define RIGHT_N 5
 #define RIGHT_F 6
-/* High value mean white Low value means black */
+/* High value mean black Low value means white*/
 bool is_High(Input * input, uint8_t pin) {
   uint16_t value = input->data[pin];
   uint16_t high  = sensor_high[pin];
@@ -17,7 +17,6 @@ bool is_High(Input * input, uint8_t pin) {
   if (value > high) return true;
    
   int mid = ((int)high + (int)low)/2;
-  //uint16_t mid = (uint16_t)((float)(high + low)/(float)2);
   
   if (value > mid) return true;
   return false;
@@ -25,7 +24,7 @@ bool is_High(Input * input, uint8_t pin) {
 
 bool on_Line(Input * in) {
   for (int i = 0; i < 7; i++) {
-    if (!is_High(in, i)) return true;
+    if (is_High(in, i)) return true;
   }
   return false;
 }
@@ -61,6 +60,14 @@ bool on_Center_Line(Input * in) {
   }
   return false;
 }
+
+bool off_Line(Input * in) {
+  for (int i = 0; i < 7; i++) {
+    if (is_High(in, i)) return false;
+  }
+  return true;
+}
+
 
 bool is_Goal(Input * in) {
   for (int i = 0; i < 7; i++) {

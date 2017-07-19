@@ -14,9 +14,10 @@ bool is_State(char * state_name, State * cs) {
 
 void set_State(char * name, State * current) {
   /* TODO: for some reason is broken */
-  for (State * s = &STATES[0]; s != NULL; s += sizeof(State*)) {
-    if (is_State(name, s)) {
-      current = s;
+  for (int i = 0; i < MAX_STATES; i++) {
+    if (is_State(name, &STATES[i])) {
+      *current = STATES[i];
+      return;
     }
   }
   /* impossible code path */

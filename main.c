@@ -39,7 +39,7 @@ int main(void) {
      See states.h for complete listing of states. 
      TODO: Fix set_State function 
   */
-  //set_State("stop_robot", &current_state); 
+  set_State("start", &current_state); 
   /* 
      Run the eval method and start control loop.
 

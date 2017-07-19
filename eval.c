@@ -19,10 +19,11 @@ bool eval(State * current, Input * in, Maze * maze) {
   return false;
 #else
   //set_State("move_forward", current);
-  if (!is_High(in, 3))
+  if (on_Line(in)) {
     *current = STATES[0]; // if center thing is back forward 
-  else
+  } else {
     *current = STATES[5]; // else stop the robot
+  }
   return false;
 #endif 
 }

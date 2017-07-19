@@ -2,7 +2,7 @@
 #define STATES_H
 #include "state.h"
 
-#define MAX_STATES 32
+#define MAX_STATES 10 /* For the love of all that is holy change this!! */ 
 /* 
   This structure defines all the possible states that
   the robot can execute. If new functionality is added,
