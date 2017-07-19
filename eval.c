@@ -18,11 +18,16 @@ bool eval(State * current, Input * in, Maze * maze) {
   }
   return false;
 #else
-  //set_State("move_forward", current);
-  if (on_Line(in)) {
-    *current = STATES[0]; // if center thing is back forward 
+  if (is_Goal(in)) {
+    set_State("robot_stop", current);
+  } else if (on_Center_Line(in)) {
+    set_State("move_forward", current);
+  } else if (line_Right(in)) {
+    set_State("turn_right", current);
+  } else if (line_Left(in)) {
+    set_State("turn_left", current);
   } else {
-    *current = STATES[5]; // else stop the robot
+    set_State("turn_right", current);
   }
   return false;
 #endif 

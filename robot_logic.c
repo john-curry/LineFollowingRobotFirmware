@@ -24,16 +24,16 @@ void reverse_Robot(Robot * robot, State * current_state) {
 
 void turn_Left(Robot * robot, State * current_state) {
   GPIO_SetBits(GPIOD, robot->motor_plf);  
-  GPIO_ResetBits(GPIOD, robot->motor_plr
-                      | robot->motor_prr 
+  GPIO_SetBits(GPIOD, robot->motor_prr);  
+  GPIO_ResetBits(GPIOD, robot->motor_plr 
                       | robot->motor_prf);
 }
 
 void turn_Right(Robot * robot, State * current_state) {
   GPIO_SetBits(GPIOD, robot->motor_prf);  
-  GPIO_ResetBits(GPIOD, robot->motor_plf
-                      | robot->motor_prr 
-                      | robot->motor_plr);
+  GPIO_SetBits(GPIOD, robot->motor_plr);  
+  GPIO_ResetBits(GPIOD, robot->motor_prr 
+                      | robot->motor_plf);
 }
 
 void delay_Robot(Robot * robot, State * current_state) {
