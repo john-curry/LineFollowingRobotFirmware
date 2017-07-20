@@ -4,13 +4,14 @@
 /* TODO: Comment this section */
 /* TODO: Test this section */
 void move_Forward(Robot * robot, State * current_state) {
-  GPIO_SetBits(GPIOD, robot->motor_plf);  
+  GPIO_SetBits(GPIOB, robot->motor_plf);  
   GPIO_SetBits(GPIOD, robot->motor_prf);  
-  GPIO_ResetBits(GPIOD, robot->motor_plr | robot->motor_prr);
+  GPIO_ResetBits(GPIOD, robot->motor_plr 
+                      | robot->motor_prr);
 }
 
 void stop_Robot(Robot * robot, State * current_state) {
-  GPIO_SetBits(GPIOD, robot->motor_plf);  
+  GPIO_SetBits(GPIOB, robot->motor_plf);  
   GPIO_SetBits(GPIOD, robot->motor_prf);  
   GPIO_SetBits(GPIOD, robot->motor_plr);  
   GPIO_SetBits(GPIOD, robot->motor_prr);  
@@ -19,11 +20,12 @@ void stop_Robot(Robot * robot, State * current_state) {
 void reverse_Robot(Robot * robot, State * current_state) {
   GPIO_SetBits(GPIOD, robot->motor_plr);  
   GPIO_SetBits(GPIOD, robot->motor_prr);  
-  GPIO_ResetBits(GPIOD, robot->motor_plf | robot->motor_prf);
+  GPIO_ResetBits(GPIOB, robot->motor_plf); 
+  GPIO_ResetBits(GPIOD, robot->motor_prf);
 }
 
 void turn_Left(Robot * robot, State * current_state) {
-  GPIO_SetBits(GPIOD, robot->motor_plf);  
+  GPIO_SetBits(GPIOB, robot->motor_plf);  
   GPIO_SetBits(GPIOD, robot->motor_prr);  
   GPIO_ResetBits(GPIOD, robot->motor_plr 
                       | robot->motor_prf);
@@ -32,8 +34,8 @@ void turn_Left(Robot * robot, State * current_state) {
 void turn_Right(Robot * robot, State * current_state) {
   GPIO_SetBits(GPIOD, robot->motor_prf);  
   GPIO_SetBits(GPIOD, robot->motor_plr);  
-  GPIO_ResetBits(GPIOD, robot->motor_prr 
-                      | robot->motor_plf);
+  GPIO_ResetBits(GPIOB ,robot->motor_plf); 
+  GPIO_ResetBits(GPIOD, robot->motor_prr); 
 }
 
 void delay_Robot(Robot * robot, State * current_state) {
@@ -50,10 +52,14 @@ void victory_Dance(Robot * robot, State * current_state) {
 }
 void reverse_Left(Robot * robot, State * current_state) {
   GPIO_SetBits(GPIOD, robot->motor_plr);  
-  GPIO_ResetBits(GPIOD, robot->motor_plf | robot->motor_prf | robot->motor_prr);
+  GPIO_ResetBits(GPIOB ,robot->motor_plf); 
+  GPIO_ResetBits(GPIOD, robot->motor_prr); 
+  GPIO_ResetBits(GPIOD, robot->motor_prf); 
 }
 
 void reverse_Right(Robot * robot, State * current_state) {
   GPIO_SetBits(GPIOD, robot->motor_prr);  
-  GPIO_ResetBits(GPIOD, robot->motor_plf | robot->motor_prf | robot->motor_plr);
+  GPIO_ResetBits(GPIOB ,robot->motor_plf); 
+  GPIO_ResetBits(GPIOD, robot->motor_plr); 
+  GPIO_ResetBits(GPIOD, robot->motor_prf); 
 }

@@ -14,11 +14,8 @@ int main(void) {
   /* holds all the data about the robot */
   Robot robot;
 
-  /* polulate robot with values used */
+  /* polulate robot with values used and init_GPIO */
   init_Robot(&robot);
-
-  /* enable and setup the GPIO pins the robot uses */
-  init_GPIO(&robot); 
 
   /* data structure to hold input data */
   Input input;
@@ -39,7 +36,7 @@ int main(void) {
      See states.h for complete listing of states. 
      TODO: Fix set_State function 
   */
-  set_State("start", &current_state); 
+  set_State("stop_robot", &current_state); 
   /* 
      Run the eval method and start control loop.
 
@@ -56,6 +53,8 @@ int main(void) {
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);
   }
+  set_State("stop_robot", &current_state);
+  execute_State(&robot, &current_state);
   return 0;
 }
 

@@ -8,6 +8,6 @@ target extended localhost:4242
 load
 b main
 c
-b 52
+b eval
 c
-print current_state
+print in->data

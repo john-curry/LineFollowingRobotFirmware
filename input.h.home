@@ -15,24 +15,24 @@ typedef struct _input_types {
 
 /* On black */
 static uint16_t sensor_high[NUM_INPUTS] = {
-  2100,
-  2900,
-  3000,
+  3400,
   3100,
-  2500,
-  2900,
-  3000
+  3000,
+  3200,
+  2100,
+  3100,
+  3300
 };
 
 /* On white */
 static uint16_t sensor_low[NUM_INPUTS] = {
-  1600,
-  2100,
-  2600,
-  2700,
-  1600,
+  2900,
   2500,
-  2700
+  2100,
+  2800,
+  1200,
+  2700,
+  2800
 };
 
 static uint8_t pins[NUM_INPUTS] = {
