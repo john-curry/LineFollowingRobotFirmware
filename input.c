@@ -70,10 +70,11 @@ bool off_Line(Input * in) {
 
 
 bool is_Goal(Input * in) {
-  for (int i = 0; i < 7; i++) {
-    if (!is_High(in, i)) return false;
-  }
-  return true;
+  if (is_High(in, 1) 
+   && is_High(in, 2) 
+   && is_High(in, 4) 
+   && is_High(in, 5)) return true;
+  return false;
 } 
 
 bool is_Input(char * input_name, Input * in) {

@@ -32,10 +32,6 @@ int main(void) {
   /* struct to hold the current action the robot is doing */ 
   State current_state; 
 
-  /* Tell the robot to start in state "start". 
-     See states.h for complete listing of states. 
-     TODO: Fix set_State function 
-  */
   set_State("stop_robot", &current_state); 
   /* 
      Run the eval method and start control loop.

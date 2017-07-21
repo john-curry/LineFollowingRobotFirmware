@@ -18,20 +18,21 @@ bool eval(State * current, Input * in, Maze * maze) {
   }
   return false;
 #else
-  set_State("stop_robot", current);
+  //set_State("move_forward", current);
   //if (is_Goal(in)) {
+  //  set_State("goal", current);
   //  return true;
   //}
 
-  //if (on_Center_Line(in)) {
-  //  set_State("move_forward", current);
-  //} else if (line_Right(in)) {
-  //  set_State("turn_right", current);
-  //} else if (line_Left(in)) {
-  //  set_State("turn_left", current);
-  //} else {
-  //  set_State("turn_left", current);
-  //}
+  if (on_Center_Line(in)) {
+    set_State("move_forward", current);
+  } else if (line_Right(in)) {
+    set_State("turn_right", current);
+  } else if (line_Left(in)) {
+    set_State("turn_left", current);
+  } else {
+    set_State("turn_right", current);
+  }
   return false;
 #endif 
 }

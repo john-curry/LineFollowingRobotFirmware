@@ -1,26 +1,4 @@
 #include "init_input.h"
-
-void init_Timer() {
-  /* TODO: For some reason this does not fire when I want it to */
-  /* Timer datastructure */
-  TIM_TimeBaseInitTypeDef timerInitStructure; 
-
-  /* Enable timer clock */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-  
-  /* Initialize clock */
-  timerInitStructure.TIM_Prescaler = 83;
-  timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-  timerInitStructure.TIM_Period = 2999;
-  timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-  timerInitStructure.TIM_RepetitionCounter = 0;
-
-  /* Start timer */
-  TIM_TimeBaseInit(TIM2, &timerInitStructure);
-  TIM_Cmd(TIM2, ENABLE);
-  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-}
-
  void init_Input(Input * input) {
   ADC_InitTypeDef       ADC_InitStructure;
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
@@ -80,5 +58,4 @@ void init_Timer() {
   /* Enable ADC1 */
   ADC_Init(ADC1, &ADC_InitStructure);
   ADC_Cmd(ADC1, ENABLE);
-  init_Timer();
 }
