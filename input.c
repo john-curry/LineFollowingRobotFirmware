@@ -15,10 +15,13 @@ bool is_High(Input * input, uint8_t pin) {
 
   if (value < low)  return false;
   if (value > high) return true;
-   
-  int mid = ((int)high + (int)low)/2;
   
-  if (value > mid) return true;
+  double h = (double)h; 
+  double l = (double)l;
+  double v = (double)value;
+  double m = (double)(h + l)/(double)2;
+  
+  if (v > m) return true;
   return false;
 }
 
@@ -96,9 +99,26 @@ void delay() {
 void read_Input(Input * input) {
   clear_Data(input);
 
+  GPIO_ResetBits(GPIOD, GPIO_Pin_0);
+  GPIO_ResetBits(GPIOD, GPIO_Pin_0);
   for (uint8_t i = 0; i < 7; i++) {
-    GPIO_ResetBits(GPIOD, 0b111);
-    GPIO_SetBits  (GPIOD, pins[i]);
+    //GPIO_ResetBits(GPIOD, 0b111);
+    //GPIO_SetBits  (GPIOD, pins[i]);
+    if (i % 2 == 1) {
+      GPIO_SetBits(GPIOD, GPIO_Pin_2);
+    } else {
+      GPIO_ResetBits(GPIOD, GPIO_Pin_2);
+    }
+    if (i == 2 || i == 3 || i == 6) {
+      GPIO_SetBits(GPIOD, GPIO_Pin_0);
+    } else {
+      GPIO_ResetBits(GPIOD, GPIO_Pin_0);
+    }
+    if (i < 4) {
+      GPIO_ResetBits(GPIOC, GPIO_Pin_11);
+    } else {
+      GPIO_SetBits(GPIOC, GPIO_Pin_11);
+    }
     delay();
     ADC_RegularChannelConfig(ADC1, channels[i], 1, ADC_SampleTime_3Cycles);
     ADC_SoftwareStartConv(ADC1);

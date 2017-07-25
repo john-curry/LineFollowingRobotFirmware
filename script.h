@@ -3,15 +3,13 @@
 /* end of script */
 #define EOS (-1) 
 static int script[] = {
-  5, // stop
+  0,
   4,
   1,
   4,
   2,
   4,
-  7,
-  4,
-  8,
+  5,
   4,
   EOS
 };

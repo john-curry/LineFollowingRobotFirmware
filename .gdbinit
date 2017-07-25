@@ -10,4 +10,3 @@ b main
 c
 b eval
 c
-print in->data

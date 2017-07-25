@@ -15,24 +15,12 @@ typedef struct _input_types {
 
 /* On black */
 static uint16_t sensor_high[NUM_INPUTS] = {
-  2100,
-  2900,
-  3000,
-  3100,
-  2500,
-  2900,
-  3000
+  4000, 3500, 4000, 3500, 2500, 3500, 3500
 };
 
 /* On white */
 static uint16_t sensor_low[NUM_INPUTS] = {
-  1600,
-  2100,
-  2600,
-  2700,
-  1600,
-  2500,
-  2700
+  2000, 2000, 2000, 2900, 1000, 2500, 3000
 };
 
 static uint8_t pins[NUM_INPUTS] = {
@@ -46,13 +34,13 @@ static uint8_t pins[NUM_INPUTS] = {
 };
 
 static uint8_t channels[NUM_INPUTS] = {
-  ADC_Channel_8,
-  ADC_Channel_9,
-  ADC_Channel_11,
-  ADC_Channel_12,
-  ADC_Channel_13,
-  ADC_Channel_14,
-  ADC_Channel_15
+  ADC_Channel_11, // PC1
+  ADC_Channel_12, // PC2
+  ADC_Channel_14, // PC4
+  ADC_Channel_8,  // PB0
+  ADC_Channel_13, // PC3
+  ADC_Channel_15, // PC5
+  ADC_Channel_9,  // PB1
 };
 
 bool is_Input(char * state_name, Input * in);

@@ -4,7 +4,8 @@
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
   GPIO_InitTypeDef      GPIO_InitStructure_B;
   GPIO_InitTypeDef      GPIO_InitStructure_C;
-  GPIO_InitTypeDef      GPIO_InitStructure_Output;
+  GPIO_InitTypeDef      GPIO_InitStructure_Output_D;
+  GPIO_InitTypeDef      GPIO_InitStructure_Output_C;
 
   /* init perhipheral clocks */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
@@ -31,13 +32,19 @@
 
 
   /* configure GPIO pins for output GPIOD */
-  GPIO_InitStructure_Output.GPIO_Pin   = GPIO_Pin_0 
-                                       | GPIO_Pin_1 
-                                       | GPIO_Pin_2;
-  GPIO_InitStructure_Output.GPIO_Mode  = GPIO_Mode_OUT;
-  GPIO_InitStructure_Output.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure_Output.GPIO_PuPd  = GPIO_PuPd_UP;
-  GPIO_Init(GPIOD, &GPIO_InitStructure_Output);
+  GPIO_InitStructure_Output_D.GPIO_Pin   = GPIO_Pin_0 
+                                         | GPIO_Pin_2;
+  GPIO_InitStructure_Output_D.GPIO_Mode  = GPIO_Mode_OUT;
+  GPIO_InitStructure_Output_D.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure_Output_D.GPIO_PuPd  = GPIO_PuPd_UP;
+  GPIO_Init(GPIOD, &GPIO_InitStructure_Output_D);
+
+  /* configure GPIO pins for output GPIOC */
+  GPIO_InitStructure_Output_C.GPIO_Pin   = GPIO_Pin_11;
+  GPIO_InitStructure_Output_C.GPIO_Mode  = GPIO_Mode_OUT;
+  GPIO_InitStructure_Output_C.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure_Output_C.GPIO_PuPd  = GPIO_PuPd_UP;
+  GPIO_Init(GPIOC, &GPIO_InitStructure_Output_C);
 
   /* ADC CommonInitStructure */
   ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;

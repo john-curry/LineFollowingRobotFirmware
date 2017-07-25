@@ -41,17 +41,17 @@ void reverse_Robot(Robot * robot, State * current_state) {
 }
 
 void turn_Left(Robot * robot, State * current_state) {
-  left_MF(OFF);
-  left_MR(ON);
-  right_MF(ON);
-  right_MR(OFF);
-}
-
-void turn_Right(Robot * robot, State * current_state) {
   left_MF(ON);
   left_MR(OFF);
   right_MF(OFF);
   right_MR(ON);
+}
+
+void turn_Right(Robot * robot, State * current_state) {
+  left_MF(OFF);
+  left_MR(ON);
+  right_MF(ON);
+  right_MR(OFF);
 }
 
 void delay_Robot(Robot * robot, State * current_state) {
@@ -65,6 +65,10 @@ void start_Robot(Robot * robot, State * current_state) {
 
 void victory_Dance(Robot * robot, State * current_state) {
   /* TODO: implement a victory dance sequence */
+  left_MF(ON);
+  left_MR(ON);
+  right_MF(ON);
+  right_MR(ON);
 }
 
 void reverse_Left(Robot * robot, State * current_state) {

@@ -31,7 +31,7 @@ bool eval(State * current, Input * in, Maze * maze) {
   } else if (line_Left(in)) {
     set_State("turn_left", current);
   } else {
-    set_State("turn_right", current);
+    set_State("turn_left", current);
   }
   return false;
 #endif 

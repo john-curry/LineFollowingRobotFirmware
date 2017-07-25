@@ -49,7 +49,7 @@ int main(void) {
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);
   }
-  set_State("stop_robot", &current_state);
+  set_State("goal", &current_state);
   execute_State(&robot, &current_state);
   return 0;
 }
