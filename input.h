@@ -10,17 +10,17 @@
 /* defines the datastructure for the IR sensor input raw data */
 typedef struct _input_types {
   uint16_t  data[NUM_INPUTS];
-  char      input_name[STR_MAX];
+  char      input_name[];
 } Input;
 
 /* On black */
 static uint16_t sensor_high[NUM_INPUTS] = {
-  4000, 3500, 4000, 3500, 2500, 3500, 3500
+  3500, 3300, 3500, 3500, 2500, 3500, 3500
 };
 
 /* On white */
 static uint16_t sensor_low[NUM_INPUTS] = {
-  2000, 2000, 2000, 2900, 1000, 2500, 3000
+  1400, 1000, 1000, 2600, 600, 1500, 2300
 };
 
 static uint8_t pins[NUM_INPUTS] = {

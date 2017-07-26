@@ -60,7 +60,10 @@ void delay_Robot(Robot * robot, State * current_state) {
 }
 
 void start_Robot(Robot * robot, State * current_state) {
-  //GPIO_SetBits(GPIOD, GPIO_Pin_All);
+  left_MF(ON);
+  left_MR(ON);
+  right_MF(ON);
+  right_MR(ON);
 }
 
 void victory_Dance(Robot * robot, State * current_state) {
@@ -72,15 +75,11 @@ void victory_Dance(Robot * robot, State * current_state) {
 }
 
 void reverse_Left(Robot * robot, State * current_state) {
-  left_MF(OFF);
-  left_MR(ON);
-  right_MF(OFF);
-  right_MR(OFF);
+  turn_Left(robot, current_state);
+  delay_Robot(robot, current_state);
 }
 
 void reverse_Right(Robot * robot, State * current_state) {
-  left_MF(OFF);
-  left_MR(OFF);
-  right_MF(OFF);
-  right_MR(ON);
+  turn_Right(robot, current_state);
+  delay_Robot(robot, current_state);
 }

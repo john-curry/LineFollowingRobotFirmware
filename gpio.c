@@ -1,5 +1,5 @@
 #include "gpio.h"
-
+#include "config.h"
 void init_Timer() {
   /* TODO: For some reason this does not fire when I want it to */
   /* Timer datastructure */
@@ -30,7 +30,7 @@ void set_PWM(int chan, bool on) {
   /* set the duty cycle */
   /*  x% duty cycle:     pulse_length = ((8399 + 1) * x) / 100 - 1 = 4199 */
 
-  TIM_OCStruct.TIM_Pulse = on ? 7199 : 0;
+  TIM_OCStruct.TIM_Pulse = on ? SPEED : 0;
 
   switch (chan) {
     case 1:

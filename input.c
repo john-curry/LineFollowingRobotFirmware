@@ -1,5 +1,6 @@
 #include <string.h>
 #include "input.h"
+#include "config.h"
 #define LEFT_F  0 // Far left
 #define LEFT_N  1 // Near left
 #define LEFT_C  2 // Left of center
@@ -21,7 +22,7 @@ bool is_High(Input * input, uint8_t pin) {
   double v = (double)value;
   double m = (double)(h + l)/(double)2;
   
-  if (v > m) return true;
+  if (value > ((high/2) + (low/2))) return true;
   return false;
 }
 
@@ -58,7 +59,7 @@ bool right_Turn(Input * in) {
 }
 
 bool on_Center_Line(Input * in) {
-  if (is_High(in, CENTER)) {
+  if (is_High(in, CENTER) || is_High(in, RIGHT_C) || is_High(in, LEFT_C)) {
     return true;
   }
   return false;
@@ -73,10 +74,13 @@ bool off_Line(Input * in) {
 
 
 bool is_Goal(Input * in) {
-  if (is_High(in, 1) 
+  if (is_High(in, 0) 
+   && is_High(in, 1) 
    && is_High(in, 2) 
+   && is_High(in, 3) 
    && is_High(in, 4) 
-   && is_High(in, 5)) return true;
+   && is_High(in, 5) 
+   && is_High(in, 6)) return true;
   return false;
 } 
 
@@ -92,7 +96,7 @@ void clear_Data(Input * input) {
 }
 
 void delay() {
-  volatile uint32_t count = 100000;
+  volatile uint32_t count = DELAY;
   while (count--);
 }
 

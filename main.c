@@ -26,13 +26,10 @@ int main(void) {
   /* holds all the data about the maze so far */
   Maze maze;
 
-  /* */
-  //init_Maze(&maze);
-
   /* struct to hold the current action the robot is doing */ 
   State current_state; 
 
-  set_State("stop_robot", &current_state); 
+  set_State("start", &current_state); 
   /* 
      Run the eval method and start control loop.
 
@@ -44,13 +41,15 @@ int main(void) {
   */ 
   read_Input(&input);
 
+  
   while (!eval(&current_state, &input, &maze)) {
     read_Input(&input);
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);
   }
-  set_State("goal", &current_state);
+  //set_State("stop_robot", &current_state);
   execute_State(&robot, &current_state);
+  while(true);
   return 0;
 }
 
