@@ -38,23 +38,33 @@ bool is_Junction(Input * in) {
   return false;
 }
 
+bool off_Left(Input * in) {
+  if (is_High(in, LEFT_C)) return true;
+  return false;
+}
+
+bool off_Right(Input * in) {
+  if (is_High(in, RIGHT_C)) return true;
+  return false;
+}
+
 bool line_Left(Input * in) {
-  if (is_High(in, LEFT_F) || is_High(in, LEFT_N)) return true;
+  if (is_High(in, LEFT_C) && is_High(in, LEFT_N)) return true;
   return false;
 }
 
 bool line_Right(Input * in) {
-  if (is_High(in, RIGHT_F) || is_High(in, RIGHT_N)) return true;
+  if (is_High(in, RIGHT_C) && is_High(in, RIGHT_N) && is_High(in, RIGHT_F)) return true;
   return false;
 }
 
 bool left_Turn(Input * in) {
-  if (is_High(in, LEFT_F) && is_High(in, LEFT_N) && is_High(in, LEFT_C)) return true;
+  if (is_High(in, LEFT_C) && is_High(in, LEFT_N) && is_High(in, LEFT_F)) return true;
   return false;
 }
 
 bool right_Turn(Input * in) {
-  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N) && is_High(in, RIGHT_C)) return true;
+  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N)) return true;
   return false;
 }
 

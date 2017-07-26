@@ -1,5 +1,7 @@
 #include "robot_logic.h"
 #include "gpio.h"
+#include "config.h"
+
 /* TODO: Add a check to see if pins are already set */
 /* TODO: Comment this sectiON */
 /* TODO: Test this sectiON */
@@ -17,6 +19,33 @@ void left_MR(bool on) {
 }
 void right_MR(bool on) {
   set_PWM(3, on);
+}
+
+void left_MF_Speed(int on) {
+  set_PWM_Speed(4, on);
+}
+void right_MF_Speed(int on) {
+  set_PWM_Speed(1, on);
+}
+void left_MR_Speed(int on) {
+  set_PWM_Speed(2, on);
+}
+void right_MR_Speed(int on) {
+  set_PWM_Speed(3, on);
+}
+
+void correct_Left(Robot * robot, State * current_state) {
+   left_MF_Speed(HIGH_SPEED);
+   left_MR_Speed(NO_SPEED);
+  right_MF_Speed(MED_SPEED);
+  right_MR_Speed(NO_SPEED);
+}
+
+void correct_Right(Robot * robot, State * current_state) {
+   left_MF_Speed(MED_SPEED);
+   left_MR_Speed(NO_SPEED);
+  right_MF_Speed(HIGH_SPEED);
+  right_MR_Speed(NO_SPEED);
 }
 
 void move_Forward(Robot * robot, State * current_state) {

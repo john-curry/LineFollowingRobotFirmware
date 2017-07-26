@@ -37,4 +37,9 @@ void start_Robot(Robot * robot, State * current_state);
 void reverse_Left(Robot * robot, State * current_state);
 
 void reverse_Right(Robot * robot, State * current_state);
+
+void correct_Left(Robot * robot, State * current_state);
+
+void correct_Right(Robot * robot, State * current_state);
+
 #endif

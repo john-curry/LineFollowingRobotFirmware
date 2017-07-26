@@ -8,6 +8,6 @@ void init_GPIOD(Robot * robot);
 void init_GPIOB(Robot * robot);
 void init_Timer();
 void set_PWM(int chan, bool on);
-void set_PWM_ON();
+void set_PWM_Speed(int chan, int speed);
 void flash_GPIO();
 #endif

@@ -57,6 +57,10 @@ bool line_Left(Input * in);
 
 bool line_Right(Input * in);
 
+bool off_Left(Input * in);
+
+bool off_Right(Input * in);
+
 bool on_Center_Line(Input * in);
 
 bool left_Turn(Input * in);

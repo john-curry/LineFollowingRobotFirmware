@@ -52,24 +52,33 @@ void set_PWM(int chan, bool on) {
   }
 }
 
-void set_PWM_OFF() {
+void set_PWM_Speed(int chan, int speed) {
   /* enable pwn on timer */
   TIM_OCInitTypeDef TIM_OCStruct;
   TIM_OCStruct.TIM_OCMode = TIM_OCMode_PWM2;
   TIM_OCStruct.TIM_OutputState = TIM_OutputState_Enable;
   TIM_OCStruct.TIM_OCPolarity = TIM_OCPolarity_Low;
 
-  /* set the duty cycle */
-  /*  50% duty cycle:     pulse_length = ((8399 + 1) * 50) / 100 - 1 = 4199 */
-  TIM_OCStruct.TIM_Pulse = 0; 
-  TIM_OC1Init(TIM4, &TIM_OCStruct);
-  TIM_OC2Init(TIM4, &TIM_OCStruct);
-  TIM_OC3Init(TIM4, &TIM_OCStruct);
-  TIM_OC4Init(TIM4, &TIM_OCStruct);
-  TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
-  TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable);
-  TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);
-  TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable);
+  TIM_OCStruct.TIM_Pulse = speed;
+
+  switch (chan) {
+    case 1:
+      TIM_OC1Init(TIM4, &TIM_OCStruct);
+      TIM_OC1PreloadConfig(TIM4, TIM_OCPreload_Enable);
+    break;
+    case 2:
+      TIM_OC2Init(TIM4, &TIM_OCStruct);
+      TIM_OC2PreloadConfig(TIM4, TIM_OCPreload_Enable);
+    break;
+    case 3:
+      TIM_OC3Init(TIM4, &TIM_OCStruct);
+      TIM_OC3PreloadConfig(TIM4, TIM_OCPreload_Enable);
+    break;
+    case 4:
+      TIM_OC4Init(TIM4, &TIM_OCStruct);
+      TIM_OC4PreloadConfig(TIM4, TIM_OCPreload_Enable);
+    break;
+  }
 }
 
 

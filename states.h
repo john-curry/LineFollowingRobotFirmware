@@ -2,7 +2,7 @@
 #define STATES_H
 #include "state.h"
 
-#define MAX_STATES 10 /* For the love of all that is holy change this!! */ 
+#define MAX_STATES 12 /* For the love of all that is holy change this!! */ 
 /* 
   This structure defines all the possible states that
   the robot can execute. If new functionality is added,
@@ -50,6 +50,14 @@ static State STATES[MAX_STATES] = {
   {
     .state_name = "start",
     .opcode = 9
+  },
+  {
+    .state_name = "correct_left",
+    .opcode = 10
+  },
+  {
+    .state_name = "correct_right",
+    .opcode = 11
   }
 };
 #endif

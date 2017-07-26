@@ -25,26 +25,32 @@ bool eval(State * current, Input * in, Maze * maze) {
     return false;
   }
   
-  if (!on_Center_Line(in) && line_Right(in)) {
+  /*if (line_Right(in) && !on_Center_Line(in)) {
     set_State("turn_right", current);
   }
-  else if (!on_Center_Line(in) && line_Left(in)) {
+  else if (line_Left(in) && !on_Center_Line(in)) {
     set_State("turn_left", current);
   }
-  else if (right_Turn(in) && !is_State("reverse_right", current)) {
+  else*/ if (line_Right(in) && !is_State("turn_left", current) && !is_State("reverse_left", current)) {
+    set_State("turn_right", current);
+  } 
+  else if (line_Left(in) && !is_State("turn_right", current) && !is_State("reverse_right", current)) {
+    set_State("turn_left", current);
+  } 
+  else if (right_Turn(in) && !is_State("reverse_right", current) && !is_State("turn_left", current)) {
     set_State("reverse_right", current);
   } 
-  else if (left_Turn(in) && !is_State("reverse_left", current)) {
+  else if (left_Turn(in) && !is_State("reverse_left", current) && !is_State("turn_right", current)) {
     set_State("reverse_left", current);
   } 
+  else if (on_Center_Line(in) && off_Right(in)) {
+    set_State("correct_right", current);
+  }
+  else if (on_Center_Line(in) && off_Left(in)) {
+    set_State("correct_left", current);
+  }
   else if (on_Center_Line(in)) {
     set_State("move_forward", current);
-  } 
-  else if (line_Right(in) || right_Turn(in)) {
-    set_State("turn_right", current);
-  } 
-  else if (line_Left(in) || left_Turn(in)) {
-    set_State("turn_left", current);
   } 
   else if (!on_Line(in)) {
     set_State("turn_right", current);
