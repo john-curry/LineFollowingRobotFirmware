@@ -42,4 +42,5 @@ void correct_Left(Robot * robot, State * current_state);
 
 void correct_Right(Robot * robot, State * current_state);
 
+void turn_Around(Robot * robot, State * current_state);
 #endif

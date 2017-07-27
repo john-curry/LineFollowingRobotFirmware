@@ -25,7 +25,7 @@ typedef struct _robot {
   uint16_t motor_prf;
   uint16_t motor_prr;
 
-
+  int facing;
 } Robot;
 
 void init_Robot(Robot * robot);

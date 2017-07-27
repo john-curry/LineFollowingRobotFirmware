@@ -4,60 +4,84 @@
 #include "state.h"
 #include "states.h"
 #include "maze.h"
+#include "config.h"
+#include "direction.h"
 #include <string.h>
-bool eval(State * current, Input * in, Maze * maze) {
-  // TODO: Figure out algorithm to use to pick the next state
-  //       ie something something like DFS or BFS would be a 
-  //       decent choice for solving this maze.
-  //strcpy(in->input_name, current->state_name); 
-#if DEBUG
-  static int program_counter = 0;
-  if (script[program_counter] != EOS) {
-    *current = STATES[script[program_counter]];
-    program_counter++;
-  } else {
-    program_counter = 0;
+bool eval(State * c, Input * in, Maze * maze) {
+
+  Directions d;
+
+  get_Directions(&d, in);
+
+  //if (is_Goal(in) && !is_State("start", c)) {
+  //  set_State("stop_robot", c);
+  //  return false;
+  //}
+  
+  //int next_direction = -1;
+  //if (is_Junction(&d)) {
+  //  if (!visited(maze, maze->current_node)) {
+  //    visit_Node(maze, &d, maze->current_node);
+  //  } 
+  //  for (int i = 0; i < 4; i++) {
+  //    if (is_Edge(maze, maze->current_node, i)) {
+  //      //next_direction = i % robot->facing;
+  //      maze->current_node = maze->edges[maze->current_node][i];
+  //    }
+  //  }
+  //  set_State("stop_robot", c);
+  //  return false;
+  //}
+  
+  if (is_State("reverse_left", c) && on_Center_Line(in)) {
+    if (on_Center_Line(in) && line_Right(in)) {
+      set_State("correct_right", c);
+    }
+    else if (on_Center_Line(in) && line_Left(in)) {
+      set_State("correct_left", c);
+    }
+    if (!on_Center_Line(in) && line_Right(in)) {
+      set_State("turn_right", c);
+    }
+    else if (!on_Center_Line(in) && line_Left(in)) {
+      set_State("turn_left", c);
+    }
+    else {
+      set_State("move_forward", c);
+    }
+    return false;
   }
-  return false;
-#else
-  if (is_Goal(in) && !is_State("start", current)) {
-    set_State("stop_robot", current);
+  if (is_Dir(&d, LEFT) && !(is_State("turn_right",c))) {
+    set_State("reverse_left", c);
     return false;
   }
   
-  /*if (line_Right(in) && !on_Center_Line(in)) {
-    set_State("turn_right", current);
-  }
-  else if (line_Left(in) && !on_Center_Line(in)) {
-    set_State("turn_left", current);
-  }
-  else*/ if (line_Right(in) && !is_State("turn_left", current) && !is_State("reverse_left", current)) {
-    set_State("turn_right", current);
-  } 
-  else if (line_Left(in) && !is_State("turn_right", current) && !is_State("reverse_right", current)) {
-    set_State("turn_left", current);
-  } 
-  else if (right_Turn(in) && !is_State("reverse_right", current) && !is_State("turn_left", current)) {
-    set_State("reverse_right", current);
-  } 
-  else if (left_Turn(in) && !is_State("reverse_left", current) && !is_State("turn_right", current)) {
-    set_State("reverse_left", current);
-  } 
-  else if (on_Center_Line(in) && off_Right(in)) {
-    set_State("correct_right", current);
+  //if (is_Dir(&d, RIGHT) && !(is_State("turn_left",c))) {
+  //  set_State("turn_right", c);
+  //  return false;
+  //}
+  //else if (!is_Dir(&d, FORWARD)) {
+  //  set_State("turn_around", c);
+  //  return false;
+  //}
+
+  if (on_Center_Line(in) && off_Right(in)) {
+    set_State("correct_right", c);
   }
   else if (on_Center_Line(in) && off_Left(in)) {
-    set_State("correct_left", current);
+    set_State("correct_left", c);
   }
-  else if (on_Center_Line(in)) {
-    set_State("move_forward", current);
-  } 
-  else if (!on_Line(in)) {
-    set_State("turn_right", current);
+  else if (line_Right(in)) {
+    set_State("turn_right", c);
   }
+  else if (line_Left(in)) {
+    set_State("turn_left", c);
+  }
+  //else if (on_Center_Line(in)) {
+  //  set_State("move_forward", c);
+  //}
   else {
-    set_State("turn_right", current);
+    //set_State("stop_robot", c); 
   }
   return false;
-#endif 
 }

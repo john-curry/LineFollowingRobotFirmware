@@ -63,6 +63,9 @@ void execute_State(Robot * robot, State * current_state) {
   else if (is_State("correct_left", current_state)) {
     correct_Left(robot, current_state);
   }
+  else if (is_State("turn_around", current_state)) {
+    turn_Around(robot, current_state);
+  }
   else if (is_State("goal", current_state)) {
     victory_Dance(robot, current_state);
   }

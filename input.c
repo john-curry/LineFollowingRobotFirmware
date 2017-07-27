@@ -1,14 +1,8 @@
 #include <string.h>
 #include "input.h"
 #include "config.h"
-#define LEFT_F  0 // Far left
-#define LEFT_N  1 // Near left
-#define LEFT_C  2 // Left of center
-#define CENTER  3
-#define RIGHT_C 4
-#define RIGHT_N 5
-#define RIGHT_F 6
 /* High value mean black Low value means white*/
+
 bool is_High(Input * input, uint8_t pin) {
   uint16_t value = input->data[pin];
   uint16_t high  = sensor_high[pin];
@@ -33,11 +27,6 @@ bool on_Line(Input * in) {
   return false;
 }
 
-bool is_Junction(Input * in) {
-  if (left_Turn(in) || right_Turn(in)) return true;
-  return false;
-}
-
 bool off_Left(Input * in) {
   if (is_High(in, LEFT_C)) return true;
   return false;
@@ -49,22 +38,22 @@ bool off_Right(Input * in) {
 }
 
 bool line_Left(Input * in) {
-  if (is_High(in, LEFT_C) && is_High(in, LEFT_N)) return true;
+  if (is_High(in, LEFT_C) || is_High(in, LEFT_N) || is_High(in, LEFT_F)) return true;
   return false;
 }
 
 bool line_Right(Input * in) {
-  if (is_High(in, RIGHT_C) && is_High(in, RIGHT_N) && is_High(in, RIGHT_F)) return true;
+  if (is_High(in, RIGHT_C) || is_High(in, RIGHT_N) || is_High(in, RIGHT_F)) return true;
   return false;
 }
 
 bool left_Turn(Input * in) {
-  if (is_High(in, LEFT_C) && is_High(in, LEFT_N) && is_High(in, LEFT_F)) return true;
+  if (is_High(in, LEFT_F)) return true;
   return false;
 }
 
 bool right_Turn(Input * in) {
-  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N)) return true;
+  if (is_High(in, RIGHT_F)) return true;
   return false;
 }
 
@@ -81,7 +70,6 @@ bool off_Line(Input * in) {
   }
   return true;
 }
-
 
 bool is_Goal(Input * in) {
   if (is_High(in, 0) 
@@ -109,6 +97,7 @@ void delay() {
   volatile uint32_t count = DELAY;
   while (count--);
 }
+
 
 void read_Input(Input * input) {
   clear_Data(input);
