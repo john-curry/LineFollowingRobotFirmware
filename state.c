@@ -3,7 +3,6 @@
 #include "states.h"
 #include "script.h"
 #include "input.h"
-#include "debug.h"
 #include <string.h>
 #include <stdlib.h>
 /* private method */

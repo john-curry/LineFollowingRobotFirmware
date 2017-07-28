@@ -8,7 +8,7 @@
 #include "input.h"
 #include "gpio.h"
 #include "init_input.h"
-
+#include "actn_timer.h"
 int main(void) {
   
   /* holds all the data about the robot */
@@ -29,7 +29,7 @@ int main(void) {
   /* struct to hold the current action the robot is doing */ 
   State current_state; 
 
-  set_State("start", &current_state); 
+  set_State("move_forward", &current_state); 
   /* 
      Run the eval method and start control loop.
 
@@ -41,13 +41,13 @@ int main(void) {
   */ 
   read_Input(&input);
 
-  
-  while (!eval(&current_state, &input, &maze)) {
+  init_Action_Timer();  
+  while (!eval(&current_state, &robot, &input, &maze)) {
     read_Input(&input);
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);
   }
-  //set_State("stop_robot", &current_state);
+  set_State("stop_robot", &current_state);
   execute_State(&robot, &current_state);
   while(true);
   return 0;

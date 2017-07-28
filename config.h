@@ -1,11 +1,15 @@
 #ifndef CONFIG
 #define CONFIG
 
+#define MILLIS 5000
+
+#define DEBUG true
+
 #define SPEED 7199
 
 #define HIGH_SPEED SPEED
 
-#define MED_SPEED ((SPEED) - 1000)
+#define MED_SPEED ((SPEED) - 500)
 
 #define LOW_SPEED ((SPEED) - 3000) 
 
