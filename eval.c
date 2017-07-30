@@ -8,17 +8,19 @@
 #include "decision.h"
 #include <string.h>
 
-bool eval(State * c, Robot * r, Input * in, Maze * maze) {
+bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
 
   Directions d;
 
-  get_Directions(&d, in);
+  Input in;
 
-  Decision decision;
+  read_Input(&in);
 
-  make_Decision(&decision, &d, maze, r);
+  get_Directions(&d, &in);
 
-  switch (decision.opcode) {
+  make_Decision(decision, &d, maze, r);
+
+  switch (decision->opcode) {
     case FORWARD:
       set_State("move_forward", c);
     break;
@@ -31,13 +33,13 @@ bool eval(State * c, Robot * r, Input * in, Maze * maze) {
     //default:
       //set_State("stop_robot", c);
   }
-      if (on_Center_Line(in) && off_Right(in)) {
+      if (on_Center_Line(&in) && off_Right(&in)) {
         set_State("correct_right", c);
       }
-      else if (on_Center_Line(in) && off_Left(in)) {
+      else if (on_Center_Line(&in) && off_Left(&in)) {
         set_State("correct_left", c);
       }
-      else if (on_Center_Line(in)) {
+      else if (on_Center_Line(&in)) {
         set_State("move_forward", c);
       }
 

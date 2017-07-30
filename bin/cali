@@ -1,0 +1,2 @@
+#!/bin/bash
+cat gdb.txt | grep '= {' > cali.txt

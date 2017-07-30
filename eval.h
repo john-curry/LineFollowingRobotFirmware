@@ -2,6 +2,7 @@
 #define EVAL_H
 #include "state.h"
 #include "input.h"
+#include "decision.h"
 #include "maze.h"
 #include "robot.h"
 /* 
@@ -10,5 +11,5 @@
   the robot should take. 
   Note: next_states is many states and method returns one state.
 */
-bool eval(State * current, Robot * r, Input * in, Maze * maze);
+bool eval(State * current, Robot * r, Decision * d, Maze * maze);
 #endif

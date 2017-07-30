@@ -6,7 +6,7 @@
 #include "maze.h"
 #include "config.h"
 
-#define MAX_DECISIONS 4
+#define MAX_DECISIONS 5
 
 typedef struct _decision {
   char * name; 
@@ -35,6 +35,10 @@ static Decision DECISIONS[MAX_DECISIONS] = {
   {
     .name = "go_forward",
     .opcode = FORWARD,
+  },
+  {
+    .name = "none",
+    .opcode = (-1),
   }
 };
 #endif
