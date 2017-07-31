@@ -1,7 +1,7 @@
 #ifndef CONFIG
 #define CONFIG
 
-#define MILLIS 5000
+#define MILLIS 10000
 
 #define DEBUG true
 
@@ -31,5 +31,5 @@
 #define LEFT    1
 #define FORWARD 2
 #define RIGHT   3
-#define NONE  (-1)
+#define NONE  (4)
 #endif

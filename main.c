@@ -29,7 +29,7 @@ int main(void) {
 
   Decision decision;
 
-  set_Decision(&decision, NONE); 
+  set_Decision(&decision, FORWARD); 
 
   init_Action_Timer();  
 

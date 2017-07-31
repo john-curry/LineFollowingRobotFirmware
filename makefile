@@ -60,7 +60,7 @@ debug: proj
 
 # Flash the STM32F4
 upload: proj
-	ssh control 'rm lfr.*'
+	ssh control 'rm lfr.* || true'
 	scp -r $(PROJ_NAME).* control:
 	ssh control 'upl'
 

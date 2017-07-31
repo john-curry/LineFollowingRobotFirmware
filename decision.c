@@ -1,15 +1,6 @@
 #include "actn_timer.h"
 #include "decision.h"
 void make_Decision(Decision * decision, Directions * directions, Maze * maze, Robot * robot) {
-    if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET) {
-      TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-    
-      if (is_Dir(directions, LEFT)) {
-        //set_Decision(decision, LEFT);
-        decision->opcode = LEFT;
-        return;
-      }
-    }
 }
 
 void set_Decision(Decision * dec, int direction) {

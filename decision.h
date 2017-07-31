@@ -38,7 +38,7 @@ static Decision DECISIONS[MAX_DECISIONS] = {
   },
   {
     .name = "none",
-    .opcode = (-1),
+    .opcode = NONE,
   }
 };
 #endif

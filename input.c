@@ -38,12 +38,12 @@ bool off_Right(Input * in) {
 }
 
 bool line_Left(Input * in) {
-  if (is_High(in, LEFT_C) || is_High(in, LEFT_N) || is_High(in, LEFT_F)) return true;
+  if (is_High(in, LEFT_C) || is_High(in, LEFT_N)) return true;
   return false;
 }
 
 bool line_Right(Input * in) {
-  if (is_High(in, RIGHT_C) || is_High(in, RIGHT_N) || is_High(in, RIGHT_F)) return true;
+  if (is_High(in, RIGHT_C) || is_High(in, RIGHT_N)) return true;
   return false;
 }
 

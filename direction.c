@@ -3,13 +3,29 @@
 #include "config.h"
 
 bool is_Junction(Directions * d) {
-  int num_direction = 0;
-  for (int i = 0; i < 4; i++) {
-    if (d->dirs[i]) {
-      num_direction++;
-    }
-  }
-  return num_direction > 2;
+  if (left_Corner(d) && right_Corner(d)) return true;
+  if (forward_Direction(d) && right_Corner(d)) return true;
+  if (forward_Direction(d) && left_Corner(d)) return true;
+  return false;
+}
+
+bool is_Corner(Directions * d) {
+  return d->dirs[LEFT] ^ d->dirs[RIGHT];
+}
+
+bool left_Corner(Directions * d) {
+  //if (!is_Corner(d)) return false;
+  return d->dirs[LEFT];
+}
+
+bool right_Corner(Directions * d) {
+  //if (!is_Corner(d)) return false;
+  return d->dirs[RIGHT];
+}
+
+bool forward_Direction(Directions * d) {
+  //if (!is_Corner(d)) return false;
+  return d->dirs[FORWARD];
 }
 
 bool dead_End(Directions * d) {

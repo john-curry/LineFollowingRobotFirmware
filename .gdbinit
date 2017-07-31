@@ -10,3 +10,6 @@ b main
 c
 b eval
 c
+delete breakpoints
+b 22
+c
