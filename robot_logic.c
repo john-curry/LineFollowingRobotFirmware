@@ -80,7 +80,7 @@ void turn_Right(Robot * robot, State * current_state) {
   left_MF(OFF);
   right_MR(OFF);
   left_MR_Speed(MED_SPEED);
-  right_MF(HIGH_SPEED);
+  right_MF_Speed(HIGH_SPEED);
 }
 
 void reverse_Left(Robot * robot, State * current_state) {
@@ -93,8 +93,8 @@ void reverse_Left(Robot * robot, State * current_state) {
 
 void reverse_Right(Robot * robot, State * current_state) {
   left_MF(OFF);
-  left_MR_Speed(HIGH_SPEED);
-  right_MF(MED_SPEED);
+  left_MR_Speed(MED_SPEED);
+  right_MF_Speed(HIGH_SPEED);
   right_MR(OFF);
   delay_Robot(robot, current_state);
 }
