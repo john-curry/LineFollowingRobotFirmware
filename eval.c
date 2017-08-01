@@ -39,12 +39,12 @@ bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
       else if (on_Center_Line(&in)) {
         set_State("move_forward", c);
       } 
-      else if (line_Left(&in)) {
-        set_State("turn_left", c);
-      }
-      else if (line_Right(&in)) {
-        set_State("turn_right", c);
-      }
+      //else if (line_Left(&in)) {
+      //  set_State("turn_left", c);
+      //}
+      //else if (line_Right(&in)) {
+      //  set_State("turn_right", c);
+      //}
       else {
         //set_State("stop_robot", c);
       }
