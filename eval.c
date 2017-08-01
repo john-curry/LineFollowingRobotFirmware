@@ -45,9 +45,6 @@ bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
       else if (line_Right(&in)) {
         set_State("turn_right", c);
       }
-      //else if (!on_Center_Line(&in)) {
-      //  set_State("stop_robot", c);
-      //}
       else {
         //set_State("stop_robot", c);
       }
@@ -65,10 +62,5 @@ bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
       set_State("stop_robot", c);
     break;
   }
-
-  //if (is_Goal(in) && !is_State("start", c)) {
-  //  set_State("stop_robot", c);
-  //  return false;
-  //}
   return false;
 }
