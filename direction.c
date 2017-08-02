@@ -20,9 +20,16 @@ Direction change_Direction(Direction d, int t) {
     else                   return West; 
   }
   else { // East
-    if      (t == LEFT)  return North; 
-    else if (t == RIGHT) return South; 
-    else if (t == BACK)  return West; 
-    else                 return East; 
+    if      (t == LEFT)    return North; 
+    else if (t == RIGHT)   return South; 
+    else if (t == BACK)    return West; 
+    else                   return East; 
   }
+}
+
+Direction opposite_Direction(Direction d) {
+  if (d == North) return South;
+  else if (d == South) return North;
+  else if (d == East) return West;
+  else return East;
 }

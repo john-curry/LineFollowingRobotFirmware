@@ -84,4 +84,6 @@ bool is_Goal(Input * in);
 bool make_Turn_Right(Input * in);
 
 bool make_Turn_Left(Input * in);
+
+bool is_Intersection(Input * in);
 #endif

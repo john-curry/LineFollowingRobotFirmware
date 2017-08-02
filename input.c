@@ -3,6 +3,25 @@
 #include "config.h"
 /* High value mean black Low value means white*/
 
+bool is_Intersection(Input * in) {
+  if (make_Turn_Right(in) && make_Turn_Left(in)) return true;
+  if (on_Line(in) && make_Turn_Right(in)) return true;
+  if (on_Line(in) && make_Turn_Left(in)) return true;
+  return false;
+}
+
+bool is_Left_Corner(Input *in) {
+  if (make_Turn_Right(in)) return false;
+  if (make_Turn_Left(in)) return true;
+  return false;
+}
+
+bool is_Right_Corner(Input *in) {
+  if (make_Turn_Left(in)) return false;
+  if (make_Turn_Right(in)) return true;
+  return false;
+}
+
 bool is_High(Input * input, uint8_t pin) {
   uint16_t value = input->data[pin];
   uint16_t high  = sensor_high[pin];

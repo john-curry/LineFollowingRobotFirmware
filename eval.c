@@ -2,14 +2,12 @@
 #include "script.h"
 #include "state.h"
 #include "states.h"
-#include "maze.h"
 #include "config.h"
 #include "direction.h"
 #include "decision.h"
 #include "actn_timer.h"
+#include "maze.h"
 #include <string.h>
-
-static int count = 0;
 bool can_turn = true;
 
 bool forward_Logic(Input * in, State * c); 
@@ -23,8 +21,17 @@ bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
   Input in;
 
   read_Input(&in);
-  
-  int op = decision->opcode;
+  if (is_Intersection(&in) && can_turn) {
+    if (make_Turn_Right(&in)) {
+      add_Node(r, RIGHT);
+    }
+    if (make_Turn_Left(&in)) {
+      add_Node(r, LEFT);
+    }
+    if (is_High(&in, CENTER)) {
+      add_Node(r, FORWARD);
+    }
+  }
   if (make_Turn_Left(&in) && can_turn) {
     decision->opcode = LEFT;
     
@@ -49,10 +56,12 @@ bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
     case LEFT:
       can_turn = false;
       left_Logic(&in, c);
+      r->facing = change_Direction(r->facing, LEFT);
     break; 
     case RIGHT:
       can_turn = false;
       right_Logic(&in, c);
+      r->facing = change_Direction(r->facing, RIGHT);
     break; 
     case NONE:
       set_State("stop_robot", c);
@@ -60,6 +69,7 @@ bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
     case BACK:
       can_turn = false;
       back_Logic(&in, c);
+      r->facing = change_Direction(r->facing, BACK);
     break; 
     default:
       set_State("stop_robot", c);
