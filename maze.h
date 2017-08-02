@@ -26,7 +26,7 @@ void init_Maze(Maze * maze);
 */
 void add_Node(Maze * maze, int from, int dir);
 
-void visit_Node(Maze * maze, Directions*, int node);
+void visit_Node(Maze * maze, Direction*, int node);
 
 bool visited(Maze * m, int n);
 

@@ -29,8 +29,7 @@ int main(void) {
 
   Decision decision;
 
-  set_Decision(&decision, FORWARD); 
-
+  decision.opcode = FORWARD;
   init_Action_Timer();  
 
   while (!eval(&current_state, &robot, &decision, &maze)) {

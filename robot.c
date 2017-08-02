@@ -7,7 +7,7 @@ void init_Robot(Robot * robot) {
 
   robot->motor_prf = GPIO_Pin_12; /* channel 1 */
   robot->motor_prr = GPIO_Pin_14; /* channel 3 */
-  robot->facing = FORWARD;
+  robot->facing = North;
   init_GPIOB(robot);
   init_GPIOD(robot);
   init_Timer();

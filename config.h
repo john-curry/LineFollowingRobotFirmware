@@ -5,19 +5,20 @@
 
 #define DEBUG true
 
-#define SPEED 7199
+#define SPEED 7599
 
 #define HIGH_SPEED SPEED
 
 #define MED_SPEED ((SPEED) - 500)
 
-#define LOW_SPEED ((SPEED) - 3000) 
+
+#define LOW_SPEED ((SPEED) - 1000) 
 
 #define NO_SPEED 0
 
 #define DELAY 100000
 
-#define COUNT 0xAFFFFF;
+#define COUNT 0xEFFFFF;
 
 #define LEFT_F  0 // Far left
 #define LEFT_N  1 // Near left

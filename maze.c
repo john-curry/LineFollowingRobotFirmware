@@ -32,11 +32,11 @@ bool is_Edge(Maze * m, int n, int dir) {
   return (m->edges[n][dir] != -1);
 }
 
-void visit_Node(Maze * maze, Directions * d, int node) {
+void visit_Node(Maze * maze, Direction * d, int node) {
   maze->visited[maze->current_node] = true;
   for (int i = 0; i < 4; i++) {
-    if (d->dirs[i]) {
-      add_Node(maze, node, i);
-    }
+    //if (d->dirs[i]) {
+    //  add_Node(maze, node, i);
+    //}
   }
 }

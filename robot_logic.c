@@ -35,52 +35,31 @@ void right_MR_Speed(int on) {
 }
 
 void correct_Left(Robot * robot, State * current_state) {
-   left_MF_Speed(HIGH_SPEED);
-   left_MR_Speed(NO_SPEED);
-  right_MF_Speed(MED_SPEED);
-  right_MR_Speed(NO_SPEED);
+   left_MR(OFF);
+  right_MR(OFF);
+   left_MF_Speed(MED_SPEED);
+  right_MF_Speed(LOW_SPEED);
 }
 
 void correct_Right(Robot * robot, State * current_state) {
-   left_MF_Speed(MED_SPEED);
-   left_MR_Speed(NO_SPEED);
-  right_MF_Speed(HIGH_SPEED);
-  right_MR_Speed(NO_SPEED);
-}
-
-void move_Forward(Robot * robot, State * current_state) {
-  left_MF(ON);
   left_MR(OFF);
-  right_MF(ON);
   right_MR(OFF);
-}
-
-void stop_Robot(Robot * robot, State * current_state) {
-  left_MF(ON);
-  left_MR(ON);
-  right_MF(ON);
-  right_MR(ON);
-}
-
-void reverse_Robot(Robot * robot, State * current_state) {
-  left_MF(OFF);
-  left_MR(ON);
-  right_MF(OFF);
-  right_MR(ON);
+  left_MF_Speed(LOW_SPEED);
+  right_MF_Speed(MED_SPEED);
 }
 
 void turn_Left(Robot * robot, State * current_state) {
   left_MR(OFF);
-  right_MF(OFF);
-  left_MF_Speed(HIGH_SPEED);
-  right_MR_Speed(MED_SPEED);
+  right_MR(OFF);
+   left_MF_Speed(MED_SPEED);
+  right_MF_Speed(NO_SPEED);
 }
 
 void turn_Right(Robot * robot, State * current_state) {
-  left_MF(OFF);
   right_MR(OFF);
-  left_MR_Speed(MED_SPEED);
-  right_MF_Speed(HIGH_SPEED);
+  left_MR(OFF);
+   left_MF_Speed(NO_SPEED);
+  right_MF_Speed(MED_SPEED);
 }
 
 void reverse_Left(Robot * robot, State * current_state) {
@@ -100,7 +79,10 @@ void reverse_Right(Robot * robot, State * current_state) {
 }
 
 void turn_Around(Robot * robot, State * current_state) {
-  turn_Right(robot, current_state);
+  left_MF(OFF);
+  left_MR_Speed(HIGH_SPEED);
+  right_MF_Speed(HIGH_SPEED);
+  right_MR(OFF);
   delay_Robot(robot, current_state);
   delay_Robot(robot, current_state);
 }
@@ -122,4 +104,25 @@ void victory_Dance(Robot * robot, State * current_state) {
   left_MR(ON);
   right_MF(ON);
   right_MR(ON);
+}
+
+void stop_Robot(Robot * robot, State * current_state) {
+  left_MF(ON);
+  left_MR(ON);
+  right_MF(ON);
+  right_MR(ON);
+}
+
+void reverse_Robot(Robot * robot, State * current_state) {
+  left_MF(OFF);
+  left_MR(ON);
+  right_MF(OFF);
+  right_MR(ON);
+}
+
+void move_Forward(Robot * robot, State * current_state) {
+   left_MF_Speed(MED_SPEED);
+  right_MF_Speed(MED_SPEED);
+  left_MR(OFF);
+  right_MR(OFF);
 }

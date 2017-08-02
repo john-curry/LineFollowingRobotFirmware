@@ -21,8 +21,8 @@ bool is_High(Input * input, uint8_t pin) {
 }
 
 bool on_Line(Input * in) {
-  for (int i = 0; i < 7; i++) {
-    if (is_High(in, i)) return true;
+  if (is_High(in, CENTER)) {
+    return true;
   }
   return false;
 }
@@ -38,24 +38,26 @@ bool off_Right(Input * in) {
 }
 
 bool line_Left(Input * in) {
-  if (is_High(in, LEFT_C) || is_High(in, LEFT_N)) return true;
+  if (is_High(in, LEFT_C) || is_High(in, LEFT_N) || is_High(in, LEFT_F)) return true;
   return false;
 }
 
 bool line_Right(Input * in) {
-  if (is_High(in, RIGHT_C) || is_High(in, RIGHT_N)) return true;
+  if (is_High(in, RIGHT_C) || is_High(in, RIGHT_N) || is_High(in, RIGHT_F)) return true;
   return false;
 }
 
+// ------------------ TURNING LOGIC ---------------------------------------
 bool left_Turn(Input * in) {
-  if (is_High(in, LEFT_F)) return true;
+  if (is_High(in, LEFT_F) && is_High(in, LEFT_N) && is_High(in, LEFT_C)) return true;
   return false;
 }
 
 bool right_Turn(Input * in) {
-  if (is_High(in, RIGHT_F)) return true;
+  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N) && is_High(in, RIGHT_C)) return true;
   return false;
 }
+// --------------------------------------------------------------------------------
 
 bool on_Center_Line(Input * in) {
   if (is_High(in, CENTER) || is_High(in, RIGHT_C) || is_High(in, LEFT_C)) {
@@ -64,11 +66,23 @@ bool on_Center_Line(Input * in) {
   return false;
 }
 
-bool off_Line(Input * in) {
-  for (int i = 0; i < 7; i++) {
-    if (is_High(in, i)) return false;
+bool make_Turn_Left(Input * in) {
+  if (left_Turn(in)) {
+    return true;
   }
-  return true;
+  return false;
+}
+
+bool make_Turn_Right(Input * in) {
+  if (right_Turn(in)) {
+    return true;
+  }
+  return false;
+}
+
+bool off_Line(Input * in) {
+  if (!is_High(in, CENTER) && !is_High(in, LEFT_F) && !is_High(in, RIGHT_F)) return true;
+  return false;
 }
 
 bool is_Goal(Input * in) {
