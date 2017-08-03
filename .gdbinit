@@ -11,5 +11,5 @@ c
 b eval
 c
 delete breakpoints
-b 26
+b 25
 c

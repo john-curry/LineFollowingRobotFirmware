@@ -5,27 +5,22 @@
 #include "direction.h"
 #include "robot.h"
 #define MN 4 
-
-typedef struct maze { } Maze;
-static int nn = 0;
-static int count = 0;
-static int cn = 0;
-
-static int graph[][4] = {
-  /* North, south, east, west */
-  { -1 , -1 , -1 , -1 },
-  { -1 , -1 , -1 , -1 },
-  { -1 , -1 , -1 , -1 },
-  { -1 , -1 , -1 , -1 },
-  { -1 , -1 , -1 , -1 }
+typedef struct maze {} Maze;
+static int number_nodes = 1;
+static int graph[][2] = {
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 },
+  { -1 , -1 }
 };
-static bool visited[MN] = {
-    true,
-    false,
-    false,
-    false
-};
-void add_Node(Robot * r, int t);
 
-void mark_visited();
+//void add_Edge(int from, int to) {
+//}  
 #endif

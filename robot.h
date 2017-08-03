@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "stm32f4_discovery.h"
 #include "direction.h"
+
 typedef struct _robot {
   /* 
     the amount that we change the angle by 

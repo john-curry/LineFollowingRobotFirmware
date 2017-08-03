@@ -4,9 +4,9 @@
 /* High value mean black Low value means white*/
 
 bool is_Intersection(Input * in) {
-  if (make_Turn_Right(in) && make_Turn_Left(in)) return true;
-  if (on_Line(in) && make_Turn_Right(in)) return true;
-  if (on_Line(in) && make_Turn_Left(in)) return true;
+  if (make_Turn_Left(in) && make_Turn_Right(in)) return true;
+  if (weak_LT(in) && weak_RT(in)) return true;
+  //if (is_High(in, RIGHT_F) && is_High(in, LEFT_F)) return true;
   return false;
 }
 
@@ -66,15 +66,24 @@ bool line_Right(Input * in) {
   return false;
 }
 
-// ------------------ TURNING LOGIC ---------------------------------------
-bool left_Turn(Input * in) {
-  if (is_High(in, LEFT_F) && is_High(in, LEFT_N) && is_High(in, LEFT_C)) return true;
+bool weak_LT(Input * in) {
+  if (is_High(in, LEFT_F) && is_High(in, LEFT_N)) return true;
   return false;
 }
 
-bool right_Turn(Input * in) {
-  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N) && is_High(in, RIGHT_C)) return true;
+bool weak_RT(Input * in) {
+  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N)) return true;
   return false;
+}
+// ------------------ TURNING LOGIC ---------------------------------------
+bool left_Turn(Input * in) {
+  if (is_High(in, LEFT_F) && is_High(in, LEFT_N) && is_High(in, LEFT_C)) { return true; }
+  else { return false; }
+}
+
+bool right_Turn(Input * in) {
+  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N) && is_High(in, RIGHT_C)) { return true; }
+  else { return false; }
 }
 // --------------------------------------------------------------------------------
 
@@ -99,11 +108,17 @@ bool make_Turn_Right(Input * in) {
   return false;
 }
 
-bool off_Line(Input * in) {
-  if (!is_High(in, CENTER) && !is_High(in, LEFT_F) && !is_High(in, RIGHT_F)) return true;
-  return false;
-}
+//bool off_Line(Input * in) {
+//  if (!is_High(in, CENTER) && !is_High(in, LEFT_F) && !is_High(in, RIGHT_F)) return true;
+//  return false;
+//}
 
+bool off_Line(Input * in) {
+  for (int i = 0; i < 7; i++) {
+    if (is_High(in, i)) return false;
+  }
+  return true;
+}
 bool is_Goal(Input * in) {
   if (is_High(in, 0) 
    && is_High(in, 1) 

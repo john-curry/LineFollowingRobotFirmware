@@ -11,14 +11,21 @@
 
 #define MED_SPEED ((SPEED) - 500)
 
-
-#define LOW_SPEED ((SPEED) - 1000) 
+#define LOW_SPEED ((SPEED) - 1200) 
 
 #define NO_SPEED 0
 
 #define DELAY 100000
 
-#define COUNT 0xEFFFFF;
+#define COUNT 0xDFFFFF;
+
+#define COUNT_FORWARD 0x000000;
+
+#define COUNT_TURN 0x00000F;
+
+#define COUNT_CORRECT 0x000000;
+
+#define COUNT_TURN_AROUND 0xEFFFFF;
 
 #define LEFT_F  0 // Far left
 #define LEFT_N  1 // Near left

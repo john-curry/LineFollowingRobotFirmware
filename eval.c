@@ -1,75 +1,87 @@
-#include "eval.h"
-#include "script.h"
 #include "state.h"
 #include "states.h"
 #include "config.h"
-#include "direction.h"
 #include "decision.h"
-#include "actn_timer.h"
-#include "maze.h"
-#include <string.h>
-bool can_turn = true;
+#include "robot_logic.h"
+#include "eval.h"
 
-bool forward_Logic(Input * in, State * c); 
-void left_Logic(Input * in, State * c);
-void right_Logic(Input * in, State * c);
-void back_Logic(Input * in, State * c);
+bool can_turn = true;
+int cancan = 0;
 
 bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
-  update_Timer();
-
   Input in;
-
   read_Input(&in);
-  if (is_Intersection(&in) && can_turn) {
-    if (make_Turn_Right(&in)) {
-      add_Node(r, RIGHT);
-    }
-    if (make_Turn_Left(&in)) {
-      add_Node(r, LEFT);
-    }
-    if (is_High(&in, CENTER)) {
-      add_Node(r, FORWARD);
-    }
-  }
-  if (make_Turn_Left(&in) && can_turn) {
-    decision->opcode = LEFT;
-    
-  } else if (make_Turn_Right(&in) && can_turn) {
-    decision->opcode = RIGHT;
-  }
+  read_Input(&in);
 
-  else if (is_High(&in, CENTER) || on_Center_Line(&in) || (line_Left(&in)) || (line_Right(&in)) || !can_turn) {
+  //set_State("move_forward", c);
+  //return false;
+
+
+
+
+
+
+
+
+
+
+
+  //if (is_Goal(&in)) {
+  //  return true;
+  //}
+  if (is_Intersection(&in)) {
+    decision->opcode = LEFT;
+  }
+  if (make_Turn_Left(&in)) {
+    decision->opcode = LEFT;
+  } 
+  else if (on_Line(&in)) {
     decision->opcode = FORWARD;
-  } else if (off_Line(&in) && can_turn) {
+  }
+  else if (make_Turn_Right(&in)) {
+    decision->opcode = RIGHT;
+  } 
+  else if (off_Left(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else if (off_Right(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else if (off_Line(&in) && can_turn) {
     decision->opcode = BACK;
-  } else {
+  } 
+  else if (line_Left(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else if (line_Right(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else {
     decision->opcode = NONE;
   }
 
   can_turn = true;
-
   switch (decision->opcode) {
     case FORWARD:
       forward_Logic(&in, c);
     break;
+
     case LEFT:
       can_turn = false;
       left_Logic(&in, c);
-      r->facing = change_Direction(r->facing, LEFT);
     break; 
+
     case RIGHT:
       can_turn = false;
       right_Logic(&in, c);
-      r->facing = change_Direction(r->facing, RIGHT);
     break; 
     case NONE:
+    can_turn = false;
       set_State("stop_robot", c);
     break; 
     case BACK:
       can_turn = false;
       back_Logic(&in, c);
-      r->facing = change_Direction(r->facing, BACK);
     break; 
     default:
       set_State("stop_robot", c);
@@ -77,63 +89,3 @@ bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
   }
   return false;
 }
-bool forward_Logic(Input * in, State * c) {
-  if (on_Line(in)) {
-    if (off_Right(in) && off_Left(in)) {
-      set_State("move_forward", c);
-      return false;
-    }
-    if (off_Right(in) && !off_Left(in)) {
-      set_State("correct_right", c);
-      return false;
-   }
-    if (off_Left(in) && !off_Right(in)) {
-      set_State("correct_left", c);
-      return false;
-    }
-    if (off_Right(in)) {
-      set_State("correct_right", c);
-      return false;
-    }
-    if (off_Left(in)) {
-      set_State("correct_left", c);
-      return false;
-    }
-  }
-  else {
-    if (line_Right(in) && line_Left(in)) {
-      set_State("move_forward", c);
-      return false;
-    }
-    if (line_Left(in) && !line_Right(in)) {
-      set_State("turn_left", c);
-      return false;
-    }
-    if (line_Right(in) && !line_Left(in)) {
-      set_State("turn_right", c);
-      return false;
-    }
-  }
-  set_State("move_forward", c);
-  return false;
-}
-
-void left_Logic(Input * in, State * c) {
-  if ((is_State("reverse_right", c) || is_State("reverse_left", c)) || is_State("turn_around", c)) {
-    return;
-  }
-  set_State("reverse_left", c);
-}
-
-void right_Logic(Input * in, State * c) {
-  if ((is_State("reverse_right", c) || is_State("reverse_left", c)) || is_State("turn_around", c)) {
-    return;
-  }
-  set_State("reverse_right", c);
-}
-
-void back_Logic(Input * in, State * c) {
-  if ((is_State("reverse_right", c) || is_State("reverse_left", c)) || is_State("turn_around", c)) return;
-  set_State("turn_around", c);
-  }
-

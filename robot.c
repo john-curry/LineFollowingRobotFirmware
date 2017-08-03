@@ -1,6 +1,8 @@
 #include "robot.h"
 #include "gpio.h"
 #include "config.h"
+
+
 void init_Robot(Robot * robot) {
   robot->motor_plf = GPIO_Pin_15;  /* channel 4 */
   robot->motor_plr = GPIO_Pin_13; /* channel 2 */
