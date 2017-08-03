@@ -3,6 +3,25 @@
 #include "config.h"
 /* High value mean black Low value means white*/
 
+bool is_Intersection(Input * in) {
+  if (make_Turn_Left(in) && make_Turn_Right(in)) return true;
+  if (weak_LT(in) && weak_RT(in)) return true;
+  //if (is_High(in, RIGHT_F) && is_High(in, LEFT_F)) return true;
+  return false;
+}
+
+bool is_Left_Corner(Input *in) {
+  if (make_Turn_Right(in)) return false;
+  if (make_Turn_Left(in)) return true;
+  return false;
+}
+
+bool is_Right_Corner(Input *in) {
+  if (make_Turn_Left(in)) return false;
+  if (make_Turn_Right(in)) return true;
+  return false;
+}
+
 bool is_High(Input * input, uint8_t pin) {
   uint16_t value = input->data[pin];
   uint16_t high  = sensor_high[pin];
@@ -21,8 +40,8 @@ bool is_High(Input * input, uint8_t pin) {
 }
 
 bool on_Line(Input * in) {
-  for (int i = 0; i < 7; i++) {
-    if (is_High(in, i)) return true;
+  if (is_High(in, CENTER)) {
+    return true;
   }
   return false;
 }
@@ -47,15 +66,26 @@ bool line_Right(Input * in) {
   return false;
 }
 
-bool left_Turn(Input * in) {
-  if (is_High(in, LEFT_F)) return true;
+bool weak_LT(Input * in) {
+  if (is_High(in, LEFT_F) && is_High(in, LEFT_N)) return true;
   return false;
 }
 
-bool right_Turn(Input * in) {
-  if (is_High(in, RIGHT_F)) return true;
+bool weak_RT(Input * in) {
+  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N)) return true;
   return false;
 }
+// ------------------ TURNING LOGIC ---------------------------------------
+bool left_Turn(Input * in) {
+  if (is_High(in, LEFT_F) && is_High(in, LEFT_N) && is_High(in, LEFT_C)) { return true; }
+  else { return false; }
+}
+
+bool right_Turn(Input * in) {
+  if (is_High(in, RIGHT_F) && is_High(in, RIGHT_N) && is_High(in, RIGHT_C)) { return true; }
+  else { return false; }
+}
+// --------------------------------------------------------------------------------
 
 bool on_Center_Line(Input * in) {
   if (is_High(in, CENTER) || is_High(in, RIGHT_C) || is_High(in, LEFT_C)) {
@@ -64,13 +94,31 @@ bool on_Center_Line(Input * in) {
   return false;
 }
 
+bool make_Turn_Left(Input * in) {
+  if (left_Turn(in)) {
+    return true;
+  }
+  return false;
+}
+
+bool make_Turn_Right(Input * in) {
+  if (right_Turn(in)) {
+    return true;
+  }
+  return false;
+}
+
+//bool off_Line(Input * in) {
+//  if (!is_High(in, CENTER) && !is_High(in, LEFT_F) && !is_High(in, RIGHT_F)) return true;
+//  return false;
+//}
+
 bool off_Line(Input * in) {
   for (int i = 0; i < 7; i++) {
     if (is_High(in, i)) return false;
   }
   return true;
 }
-
 bool is_Goal(Input * in) {
   if (is_High(in, 0) 
    && is_High(in, 1) 

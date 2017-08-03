@@ -1,49 +1,91 @@
-#include "eval.h"
-#include "script.h"
 #include "state.h"
 #include "states.h"
-#include "maze.h"
 #include "config.h"
-#include "direction.h"
 #include "decision.h"
-#include <string.h>
+#include "robot_logic.h"
+#include "eval.h"
 
-bool eval(State * c, Robot * r, Input * in, Maze * maze) {
+bool can_turn = true;
+int cancan = 0;
 
-  Directions d;
+bool eval(State * c, Robot * r, Decision * decision, Maze * maze) {
+  Input in;
+  read_Input(&in);
+  read_Input(&in);
 
-  get_Directions(&d, in);
+  //set_State("move_forward", c);
+  //return false;
 
-  Decision decision;
 
-  make_Decision(&decision, &d, maze, r);
 
-  switch (decision.opcode) {
-    case FORWARD:
-      set_State("move_forward", c);
-    break;
-    case LEFT:
-      set_State("reverse_left", c);
-    break; 
-    case RIGHT:
-      set_State("reverse_right", c);
-    break; 
-    //default:
-      //set_State("stop_robot", c);
-  }
-      if (on_Center_Line(in) && off_Right(in)) {
-        set_State("correct_right", c);
-      }
-      else if (on_Center_Line(in) && off_Left(in)) {
-        set_State("correct_left", c);
-      }
-      else if (on_Center_Line(in)) {
-        set_State("move_forward", c);
-      }
 
-  //if (is_Goal(in) && !is_State("start", c)) {
-  //  set_State("stop_robot", c);
-  //  return false;
+
+
+
+
+
+
+
+  //if (is_Goal(&in)) {
+  //  return true;
   //}
+  if (is_Intersection(&in)) {
+    decision->opcode = LEFT;
+  }
+  if (make_Turn_Left(&in)) {
+    decision->opcode = LEFT;
+  } 
+  else if (on_Line(&in)) {
+    decision->opcode = FORWARD;
+  }
+  else if (make_Turn_Right(&in)) {
+    decision->opcode = RIGHT;
+  } 
+  else if (off_Left(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else if (off_Right(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else if (off_Line(&in) && can_turn) {
+    decision->opcode = BACK;
+  } 
+  else if (line_Left(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else if (line_Right(&in)) {
+    decision->opcode = FORWARD;
+  } 
+  else {
+    decision->opcode = NONE;
+  }
+
+  can_turn = true;
+  switch (decision->opcode) {
+    case FORWARD:
+      forward_Logic(&in, c);
+    break;
+
+    case LEFT:
+      can_turn = false;
+      left_Logic(&in, c);
+    break; 
+
+    case RIGHT:
+      can_turn = false;
+      right_Logic(&in, c);
+    break; 
+    case NONE:
+    can_turn = false;
+      set_State("stop_robot", c);
+    break; 
+    case BACK:
+      can_turn = false;
+      back_Logic(&in, c);
+    break; 
+    default:
+      set_State("stop_robot", c);
+    break;
+  }
   return false;
 }

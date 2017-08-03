@@ -1,23 +1,16 @@
 #ifndef DECISION_H
 #define DECISION_H
 #include "decision.h"
-#include "direction.h"
 #include "robot.h"
 #include "maze.h"
 #include "config.h"
 
-#define MAX_DECISIONS 4
+#define MAX_DECISIONS 5
 
 typedef struct _decision {
   char * name; 
   uint8_t opcode;
 } Decision;
-
-void make_Decision(Decision * decision, Directions * directions, Maze * maze, Robot * robot);
-
-bool is_Decision(Decision * dec, int direction);
-
-void set_Decision(Decision * dec, int direction);
 
 static Decision DECISIONS[MAX_DECISIONS] = {
   {
@@ -35,6 +28,10 @@ static Decision DECISIONS[MAX_DECISIONS] = {
   {
     .name = "go_forward",
     .opcode = FORWARD,
+  },
+  {
+    .name = "none",
+    .opcode = NONE,
   }
 };
 #endif

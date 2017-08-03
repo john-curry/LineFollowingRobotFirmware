@@ -1,5 +1,5 @@
 #ifndef INPUT_H
-#define INPUT_H
+jdefine INPUT_H
 #define STR_MAX 4 /* assume 8 byte char so fits in a 32 bit register */
 #define INPUTS_MAX 32
 #include <stdbool.h>

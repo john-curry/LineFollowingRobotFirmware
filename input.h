@@ -15,12 +15,24 @@ typedef struct _input_types {
 
 /* On black */
 static uint16_t sensor_high[NUM_INPUTS] = {
-  3500, 3300, 3500, 3600, 2600, 3500, 3400
+  3300,
+  3500,
+  3500,
+  3600,
+  2600,
+  3500,
+  3700
 };
 
 /* On white */
 static uint16_t sensor_low[NUM_INPUTS] = {
-  2300, 1400, 1800, 3200, 1000, 2500, 2800
+  2000,
+  1500,
+  1300,
+  2000,
+  500,
+  2000,
+  2200
 };
 
 static uint8_t pins[NUM_INPUTS] = {
@@ -68,4 +80,14 @@ bool left_Turn(Input * in);
 bool right_Turn(Input * in);
 
 bool is_Goal(Input * in);
+
+bool make_Turn_Right(Input * in);
+
+bool make_Turn_Left(Input * in);
+
+bool is_Intersection(Input * in);
+
+bool weak_RT(Input * in);
+
+bool weak_LT(Input * in);
 #endif

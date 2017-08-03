@@ -9,6 +9,7 @@
 #include "gpio.h"
 #include "init_input.h"
 #include "actn_timer.h"
+#include "decision.h"
 int main(void) {
   
   /* holds all the data about the robot */
@@ -17,11 +18,8 @@ int main(void) {
   /* polulate robot with values used and init_GPIO */
   init_Robot(&robot);
 
-  /* data structure to hold input data */
-  Input input;
-
   /* enable ADC TODO: still does not work */
-  init_Input(&input);
+  init_Input();
 
   /* holds all the data about the maze so far */
   Maze maze;
@@ -29,21 +27,12 @@ int main(void) {
   /* struct to hold the current action the robot is doing */ 
   State current_state; 
 
-  set_State("move_forward", &current_state); 
-  /* 
-     Run the eval method and start control loop.
+  Decision decision;
 
-     The method eval will read from the input,
-     update the maze object and alse update  
-     the current_state.
-     The method eval will return true only when 
-     robot has obtained the "goal" state.
-  */ 
-  read_Input(&input);
-
+  decision.opcode = FORWARD;
   init_Action_Timer();  
-  while (!eval(&current_state, &robot, &input, &maze)) {
-    read_Input(&input);
+
+  while (!eval(&current_state, &robot, &decision, &maze)) {
     /* do thing that the robot should do */
     execute_State(&robot, &current_state);
   }

@@ -1,7 +1,7 @@
 # Put your stlink folder here so make burn will work.
 STLINK=~/src/stlink
 
-SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c state.c robot.c maze.c robot_logic.c input.c gpio.c init_input.c eval.c direction.c actn_timer.c decision.c
+SRCS=main.c system_stm32f4xx.c stm32f4xx_it.c state.c robot.c maze.c motor_logic.c input.c gpio.c init_input.c eval.c direction.c actn_timer.c decision.c robot_logic.c
 
 # Library modules
 SRCS += stm32f4xx_gpio.c stm32f4xx_rcc.c stm32f4xx_adc.c stm32f4xx_tim.c
@@ -60,7 +60,7 @@ debug: proj
 
 # Flash the STM32F4
 upload: proj
-	ssh control 'rm lfr.*'
+	ssh control 'rm lfr.* || true'
 	scp -r $(PROJ_NAME).* control:
 	ssh control 'upl'
 

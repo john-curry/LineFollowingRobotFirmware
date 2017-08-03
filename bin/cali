@@ -1,0 +1,4 @@
+#!/bin/bash
+rm cali.txt gdb.txt
+bin/debug
+cat gdb.txt | grep '= {' > cali.txt

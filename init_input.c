@@ -1,5 +1,6 @@
 #include "init_input.h"
- void init_Input(Input * input) {
+#include "input.h"
+ void init_Input() {
   ADC_InitTypeDef       ADC_InitStructure;
   ADC_CommonInitTypeDef ADC_CommonInitStructure;
   GPIO_InitTypeDef      GPIO_InitStructure_B;

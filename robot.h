@@ -2,6 +2,8 @@
 #define ROBOT_H
 #include <stdint.h>
 #include "stm32f4_discovery.h"
+#include "direction.h"
+
 typedef struct _robot {
   /* 
     the amount that we change the angle by 
@@ -25,7 +27,7 @@ typedef struct _robot {
   uint16_t motor_prf;
   uint16_t motor_prr;
 
-  int facing;
+  Direction facing;
 } Robot;
 
 void init_Robot(Robot * robot);
